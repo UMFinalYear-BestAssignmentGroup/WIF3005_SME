@@ -87,13 +87,15 @@
                         </td>
                         <td class="clsValue">
                             <b-select v-model="department" expanded="" style="width:98%;">
+                                <option value= "">  </option>
                                 <option value= "mar"> Marine</option>
                                 <option value="cct">Commercial and Contract </option>
                                 <option value="acct">Account</option>
                                 <option value="adm">Admin</option>
                                 <option value="tgd">Trading</option>
                             </b-select>
-                            <div class="error" v-if="!$v.department.required && isPosted">Department is required</div>
+                            <!-- <div class="error" v-if="!$v.department.required && isPosted">Department is required</div> -->
+                            <div class="error" v-if="department == '' && isPosted"> Department is required</div>
                         </td>
                     </tr>
                     <tr>
@@ -211,7 +213,6 @@ export default {
         t4: false,
         is_admin: false,
         isPosted : false,
-        dataBackgroundColor : 'blue',
         validateDepartment: true,
         isLoading: false
     };
@@ -238,7 +239,7 @@ export default {
       connfirmPassword: minLength(8),
       sameAsPassword: sameAs('password')
     },department: {
-      required
+    //   required
     },branch: {
       required
     },firstname: {
@@ -266,26 +267,41 @@ export default {
         // if(this.register.username && this.register.password)
         this.isPosted = true;
         if (!this.$v.$invalid){
-            try {
-                this.isLoading = true;
-                const users = await admin.new_user(this.userObj.toJson());
-                console.log(users); //can be ignored
-                this.posted = true;
-                localStorage.message = "New User Created";
-                // this.$router.push({ path: `/message/${this.id}` });
-                this.$router.push({ path: `/user/${this.id}` });
-                this.isLoading = false;
-                this.registered();
-                //add redirect to other page here
-            } catch (err) {
-                this.isLoading = false;
-                alert(err);
-                this.error = err.message;
+            if(this.tier == 'usert1' || this.tier == 'usert2' || this.tier == 'usert3'){
+                if(this.department == ''){
+                    alert("Fill all the required fields");
+                    } 
+                else{
+                    this.register();
+                }
+            }
+            else{
+                this.register();
             }
         }
-        else
+        else{
             alert("Fill all the required fields");
+        }
+            
         
+    },
+    async register(){
+    try {
+            this.isLoading = true;
+            const users = await admin.new_user(this.userObj.toJson());
+            console.log(users); //can be ignored
+            this.posted = true;
+            localStorage.message = "New User Created";
+            // this.$router.push({ path: `/message/${this.id}` });
+            this.$router.push({ path: `/user/${this.id}` });
+            this.isLoading = false;
+            this.registered();
+            //add redirect to other page here
+        } catch (err) {
+            this.isLoading = false;
+            alert(err);
+            this.error = err.message;
+        }
     },
     mapObj(){
       if(this.tier == "acct_t")
