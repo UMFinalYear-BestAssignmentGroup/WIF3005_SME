@@ -11,7 +11,7 @@
                     <col width="25%">
                     <col width="70%">
                     <tr>
-                        <td class="clsLabel">
+                        <td class="clsLabel" id="required">
                             Old Password:
                         </td>
                         <td class="clsValue">
@@ -21,7 +21,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="clsLabel">
+                        <td class="clsLabel" id="required">
                             New Password:
                         </td>
                         <td class="clsValue">
@@ -31,7 +31,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="clsLabel">
+                        <td class="clsLabel" id="required">
                             Confirm New Password:
                         </td>
                         <td class="clsValue">
@@ -42,6 +42,7 @@
                     </tr>
                     
                 </table>
+                <h4 class="content" style="font-weight: normal;"><span style="color:red;margin-left:5%;">*</span> indicate required field</h4>
                 <br><br>
                 <md-button
                     class="md-raised md-success"
@@ -184,4 +185,8 @@ export default {
       padding: 0.5em 0.75em;
       vertical-align: top;
   }
+  #required:after { 
+    content:"*"; 
+    color: red;
+}
 </style>
