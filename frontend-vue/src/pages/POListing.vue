@@ -142,11 +142,15 @@
             </b-table-column>
             <b-table-column field="is_approved" label="Is Approved" centered="">
               <!-- {{ props.row.status }}  -->
-              <span v-if="props.row.status" style="font-size: 2em; color: #84f092;">
+              {{props.row.status}}
+              <span v-if="props.row.status == true" style="font-size: 2em; color: #84f092;">
                 <i class="far fa-check-circle"></i>
               </span>
-              <span v-else style="font-size: 2em; color: #f72828;">
+              <span v-else-if="props.row.status == false" style="font-size: 2em; color: #f72828;">
                 <i class="far fa-times-circle"></i>
+              </span>
+              <span v-else style="font-size: 2em; color: #f72828;">
+                <i class="far fa-hourglass-start"></i>
               </span>
             </b-table-column>
           </template>
