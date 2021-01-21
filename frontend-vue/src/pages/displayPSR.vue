@@ -13,7 +13,7 @@
             v-if="psrs.status_decline == false && psrs.status_t2 == false"
             @click="showDialog = true"
             class="alert alert-warning"
-            style="border-radius:30px;"
+            style="border-radius:30px;cursor: pointer;"
           >
             <h4>
               <center><strong> Status: Pending </strong></center>
@@ -23,7 +23,7 @@
             v-else-if="psrs.status_decline == true"
             @click="showDialog = true"
             class="alert alert-danger"
-            style="border-radius:30px;"
+            style="border-radius:30px;cursor: pointer;"
           >
             <h4>
               <center><strong> Status: Declined </strong></center>
@@ -32,7 +32,7 @@
           <div
             v-else
             class="alert alert-success"
-            style="border-radius:30px;"
+            style="border-radius:30px;cursor: pointer;"
             @click="showDialog = true"
           >
             <h4>
@@ -194,7 +194,12 @@
         <br /><br /><br />
         
         <md-dialog :md-active.sync="showDialog" style="width:100%; overflow:auto;">
-            <md-dialog-title>Purchase Order Details</md-dialog-title>
+            <md-dialog-title>
+              Purchase Order Details 
+              <span class="tag is-warning" v-if="psrs.status_decline == false && psrs.status_t2 == false">Pending</span>
+              <span class="tag is-danger" v-else-if="psrs.status_decline == true">Declined</span>
+              <span class="tag is-success" v-else>Approved</span>
+            </md-dialog-title>
             <md-content>
               <table cls="clsFormDetails" width="95%:" style="margin-left: 3%;">
                     <col width="25%">
