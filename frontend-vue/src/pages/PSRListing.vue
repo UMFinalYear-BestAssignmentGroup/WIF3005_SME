@@ -11,7 +11,7 @@
         <md-card-expand>
         <md-card-actions md-alignment="space-between">
           <md-card-expand-trigger>
-            <md-button>Filter</md-button>
+            <md-button class="md-primary">Filter</md-button>
           </md-card-expand-trigger>
         </md-card-actions>
 
@@ -131,7 +131,7 @@
             </table>
             
         <md-card-actions md-alignment="right">
-            <md-button @click="filter()">Submit</md-button>
+            <md-button class="md-success" @click="filter()">Submit</md-button>
         </md-card-actions>
           </div>
         </md-card-content>
