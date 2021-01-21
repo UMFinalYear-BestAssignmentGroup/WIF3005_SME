@@ -23,7 +23,7 @@
                         </td>
                     </tr>-->
                      <tr>
-                        <td class="clsLabel">
+                        <td class="clsLabel" id="required">
                             <h4>Our Reference: </h4>
                         </td>
                         <td class="clsValue">
@@ -32,7 +32,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="clsLabel">
+                        <td class="clsLabel" id="required">
                             <h4>Your Quotation:</h4>
                         </td>
                         <td class="clsValue">
@@ -41,7 +41,7 @@
                         </td>
                     </tr>
                      <tr>
-                        <td class="clsLabel">
+                        <td class="clsLabel" id="required">
                             <h4>Delivery Due Date:</h4>
                         </td>
                         <td class="clsValue">
@@ -54,7 +54,7 @@
                     </tr>
                   <tr>
                     <tr>
-                        <td class="clsLabel">
+                        <td class="clsLabel" id="required">
                             <h4>Mode of Shipment</h4>
                         </td>
                         <td class="clsValue">
@@ -69,7 +69,7 @@
                         </td>
                     </tr>
                   <tr>
-                        <td class="clsLabel">
+                        <td class="clsLabel" id="required">
                             <h4>CCA No.:</h4>
                         </td>
                         <td class="clsValue">
@@ -78,7 +78,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="clsLabel">
+                        <td class="clsLabel" id="required">
                             <h4>Mode of Payment:</h4>
                         </td>
                         <td class="clsValue">
@@ -93,7 +93,7 @@
                         </td>
                     </tr>
                   <tr>
-                        <td class="clsLabel">
+                        <td class="clsLabel" id="required">
                             <h4>To:</h4>
                         </td>
                         <td class="clsValue">
@@ -102,7 +102,7 @@
                         </td>
                     </tr>
                   <tr>
-                        <td class="clsLabel">
+                        <td class="clsLabel" id="required">
                             <h4>Company:</h4>
                         </td>
                         <td class="clsValue">
@@ -111,7 +111,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="clsLabel">
+                        <td class="clsLabel" id="required">
                             <h4>Address:</h4>
                         </td>
                         <td class="clsValue">
@@ -142,7 +142,7 @@
                     </tr>
                 
               </table>
-
+              <h4 class="content" style="font-weight: 400;"><span style="color:red;margin-left:5%;">*</span> indicate required field</h4>
               <div class="md-layout"></div>
               <md-button
                 class="md-raised md-success"
@@ -240,7 +240,7 @@
             </md-card-content>
             {{ item }}
             <md-button
-              class="md-raised"
+              class="md-raised md-success"
               @click.prevent="po_addpo()"
               style="float:right"
               >Submit</md-button
@@ -494,5 +494,9 @@ table {
 }
 #body {
   background-color: #120136;
+}
+#required h4:after { 
+    content:"*"; 
+    color: red;
 }
 </style>

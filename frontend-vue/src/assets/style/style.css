@@ -71,3 +71,8 @@ td.clsValueDetails{
 .error{
     color: red;
 }
+
+#required h4:after { 
+    content:"*"; 
+    color: red;
+}

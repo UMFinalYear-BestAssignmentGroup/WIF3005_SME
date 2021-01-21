@@ -16,7 +16,7 @@
                     <col width="25%">
                     <col width="70%">
                     <tr>
-                        <td class="clsLabel">
+                        <td class="clsLabel" id="required">
                             <h4>First Name:</h4>
                         </td>
                         <td class="clsValue">
@@ -25,7 +25,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="clsLabel">
+                        <td class="clsLabel" id="required">
                             <h4>Last Name:</h4>
                         </td>
                         <td class="clsValue">
@@ -34,7 +34,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="clsLabel">
+                        <td class="clsLabel" id="required">
                             <h4>Email Address:</h4>
                         </td>
                         <td class="clsValue">
@@ -43,7 +43,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="clsLabel">
+                        <td class="clsLabel" id="required">
                             <h4>Username:</h4>
                         </td>
                         <td class="clsValue">
@@ -52,7 +52,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="clsLabel">
+                        <td class="clsLabel" id="required">
                             <h4>Designation:</h4>
                         </td>
                         <td class="clsValue">
@@ -71,7 +71,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="clsLabel">
+                        <td class="clsLabel" id="required">
                             <h4>Branch:</h4>
                         </td>
                         <td class="clsValue">
@@ -82,7 +82,7 @@
                         </td>
                     </tr>
                     <tr v-if="tier != 'usert4' && tier != 'is_admin' && tier != 'acct_t'">
-                        <td class="clsLabel">
+                        <td class="clsLabel" id="required">
                             <h4>Department:</h4>
                         </td>
                         <td class="clsValue">
@@ -99,16 +99,16 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="clsLabel">
+                        <td class="clsLabel" id="required">
                             <h4>Home Address:</h4>
                         </td>
-                        <td class="clsValue">
+                        <td class="clsValue" id="required">
                             <b-input v-model="address_1" style="width:98%"></b-input>
                             <div class="error" v-if="!$v.address_1.required && isPosted">Field is required</div>
                         </td>
                     </tr>
                     <tr>
-                        <td class="clsLabel">
+                        <td class="clsLabel" id="required">
                             <!-- <h4>Home Address:</h4> -->
                         </td>
                         <td class="clsValue">
@@ -133,7 +133,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="clsLabel">
+                        <td class="clsLabel" id="required">
                             <h4>Contact Number:</h4>
                         </td>
                         <td class="clsValue">
@@ -145,7 +145,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="clsLabel">
+                        <td class="clsLabel" id="required">
                             <h4>Password:</h4>
                         </td>
                         <td class="clsValue">
@@ -157,7 +157,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="clsLabel">
+                        <td class="clsLabel" id="required">
                             <h4>Confirm Password:</h4>
                         </td>
                         <td class="clsValue">
@@ -169,6 +169,7 @@
                         </td>
                     </tr>
                 </table>
+                <h4 class="content"><span style="color:red;margin-left:5%;">*</span> indicate required field</h4>
                 <br><br>
                 <md-button
                     class="md-raised md-success"
@@ -387,5 +388,9 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
+}
+#required h4:after { 
+    content:"*"; 
+    color: red;
 }
 </style>
