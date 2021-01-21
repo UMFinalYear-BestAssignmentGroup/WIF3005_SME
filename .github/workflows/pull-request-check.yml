@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Vue deployment
+name: Pull Request Check
 
 # Controls when the action will run. 
 on:
@@ -29,9 +29,14 @@ jobs:
         with: 
           node-version: '12'
           
-      - name: Install Dependencies
+      - name: Install Dependencies I
         run: cd frontend-vue && npm i
-          
-      - name: Build deployment folder
+      
+      - name: Install Dependencies II
+        run: npm i
+
+      - name: Check Vue Build
         run: cd frontend-vue && npm run build
       
+      - name: Check Node Run
+        run: npm start
