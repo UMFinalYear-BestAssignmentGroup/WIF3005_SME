@@ -23,7 +23,20 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
+        
+      - name: Setup up NodeJs in frontend-vue
+        uses: actions/setup-node@v2
+        with: 
+          node-version: '12'
+          
+      - name: Install Dependencies
+        run: cd frontend-vue && npm i
+          
+      - name: Build deployment folder
+        run: cd frontend-vue && npm run build
+        
       - uses: akhileshns/heroku-deploy@v3.8.9 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
