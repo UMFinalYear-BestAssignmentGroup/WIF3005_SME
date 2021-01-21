@@ -229,7 +229,7 @@ export default {
         // this.$router.push({ path: `/message/${this.id}` });
         this.$buefy.snackbar.open({
           duration: 3000,
-          message: 'Leave Application Declined',
+          message: 'Leave Application Approved',
           type: 'is-warning',
           position: 'is-top',
           actionText: 'OK',
