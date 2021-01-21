@@ -138,9 +138,10 @@
                         </td>
                         <td class="clsValue">
                             <b-field>
-                                <b-input type="number" v-model="contact_no" style="width:98%" ></b-input>
+                                <b-input v-model="contact_no" style="width:98%" ></b-input>
                             </b-field>
                             <div class="error" v-if="!$v.contact_no.required && isPosted">Contact Number is required</div>
+                            <div class="error" v-if="!$v.contact_no.numeric">Contact Number must be in numeric</div>
                         </td>
                     </tr>
                     <tr>
@@ -184,7 +185,7 @@
 import user from "@/js/user.js"; //directory to user.js
 import admin from "@/js/admin.js"; //directory to admin.js
 import userClass from "@/js/class/user_class.js"; //directory to admin.js
-import { required, minLength, sameAs } from 'vuelidate/lib/validators'
+import { required, minLength, sameAs, numeric } from 'vuelidate/lib/validators'
 export default {
     name: "edit-profile-form",
   data() {
@@ -257,7 +258,8 @@ export default {
     },address_2: {
       required
     },contact_no: {
-      required
+      required,
+      numeric,
     },
   },
   methods: {
@@ -375,4 +377,15 @@ export default {
 .newAction {
     background-color: #ebe534 !important;
     }
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
 </style>
