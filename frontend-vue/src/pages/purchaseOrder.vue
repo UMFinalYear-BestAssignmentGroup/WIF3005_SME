@@ -247,7 +247,7 @@
             >
             <md-button
               class="md-raised"
-              @click="back()"
+              @click="prev()"
               style="float:right"
               >Previous</md-button
             >
@@ -351,27 +351,37 @@ export default {
   // async created() {},
   methods: {
     async po_addpo() {
-        alert(this.psr_id)
-        this.mapObj();
-        console.log(this.poObj);
-        alert(this.poObj.psr_id);
-        this.isPosted = true;
-        if (!this.$v.$invalid){
-          try {
-            const po = await purchaseOrder.po_add(this.poObj);
-            console.log(po); //can be ignored
-              // localStorage.message = "Purchase Order Application Submitted";
-              // this.$router.push({ path: `/message/${this.id}` });
-              this.rerouteToMyApplication();
-              this.poCreated();
-          } catch (err) {
-            alert("Fail");
-            this.error = err.message;
-            console.log(this.error);
+      var passed = true;
+        for(var i = 0; i < this.desc.length; i++){
+          var tempt = this.desc[i];
+          if(tempt.description == null || tempt.quantity == null || tempt.unitPrice == null){
+            passed = false;
+            alert("All items must be filled of remove the row in not needed");
+            break;
           }
         }
-        else
-            alert("Fill all the required fields");
+        if(passed){
+          this.mapObj();
+          console.log(this.poObj);
+          this.isPosted = true;
+          if (!this.$v.$invalid){
+            try {
+              const po = await purchaseOrder.po_add(this.poObj);
+              console.log(po); //can be ignored
+                // localStorage.message = "Purchase Order Application Submitted";
+                // this.$router.push({ path: `/message/${this.id}` });
+                this.rerouteToMyApplication();
+                this.poCreated();
+            } catch (err) {
+              alert("Fail");
+              this.error = err.message;
+              console.log(this.error);
+            }
+          }
+          else
+              alert("Fill all the required fields");
+        }
+        
       
     },
     mapObj(){
@@ -404,7 +414,10 @@ export default {
             alert("Fill all the required fields");
     },
     back(){
-      this.$router.push(-1);
+      // this.$router.push(-1);
+      this.$router.push({
+        path: `/enterPSR/${localStorage.id}/`
+      });
     },
     submit() {
       alert("Submit to blah and show blah and etc.");
