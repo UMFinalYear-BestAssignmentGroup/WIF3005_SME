@@ -75,7 +75,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(__dirname + '/public'));
 
   //Handle SPA (Single Page Application)
-  app.get(/.*/, (req, res) => res.sendFile(__dirname + '/public/index.html'));
+  app.get(/.*/, (req, res) => res.sendFile(__dirname + '/frontend-vue/dist/index.html'));
 }
 
 // catch 404 and forward to error handler
