@@ -12,16 +12,7 @@
     }
   },
   "production": {
-    "username": "postgres",
-    "user":"postgres",
-    "password": "password",
-    "database": "po_psr",
-    "host": "127.0.0.1",
-    "dialect": "postgres",
-    "port": "5432",
-    "dialectOptions": {
-      "useUTC": false
-    }
+    "use_env_variable": "DATABASE_URL"
   },
   "timezone": "+08:00"
 }
