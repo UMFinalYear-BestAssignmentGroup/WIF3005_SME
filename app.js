@@ -72,7 +72,7 @@ console.log("DB CONN:", CONST.dbPool)
 //For production
 if (process.env.NODE_ENV === 'production') {
   //Static folder of vue.js dist
-  app.use(express.static(__dirname + '/public'));
+  app.use(express.static(__dirname + '/frontend-vue/dist'));
 
   //Handle SPA (Single Page Application)
   app.get(/.*/, (req, res) => res.sendFile(__dirname + '/frontend-vue/dist/index.html'));
