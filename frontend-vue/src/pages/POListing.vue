@@ -285,6 +285,7 @@ export default {
     },
     async filter(){
       var fulldate = null;
+      var canSearch = true;
       try {
         if(this.poNo == "")
           this.poNo = null;
@@ -300,6 +301,14 @@ export default {
           this.companyName = null;
         //testing starts
         if(this.date){
+          if(!this.month){
+            alert("Month field must must be filled if search by date")
+            canSearch = false
+          }
+          else if(!this.year){
+            alert("Month field must must be filled if search by date")
+            canSearch = false
+          }
           fulldate = new Date(this.year, this.month-1, this.date); 
           fulldate = this.year +"-" + this.month + "-" + this.date;
           console.log(fulldate);
@@ -317,7 +326,8 @@ export default {
           this.poObj.in_param_3 = fulldate;
 
         console.log(this.poObj);
-        this.getPO();
+        if(canSearch)
+          this.getPO();
         // this.poObj.in_page = 1;
         // const data = await po.po_search(this.poObj.toJson());
         // console.log(data);

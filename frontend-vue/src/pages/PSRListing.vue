@@ -303,6 +303,7 @@ export default {
     },
     async filter(){
       var fulldate = null;
+      var canSearch = true;
       try {
         if(this.psr_no == "")
           this.psr_no = null;
@@ -317,13 +318,22 @@ export default {
         if(this.branch == "")
           this.branch = null;
       //testing starts
-      console.log(this.date);
+      // alert(this.date);
       if(this.date){
-        alert(this.month);
+        // alert(this.month);
+        if(!this.month){
+          alert("Month field must must be filled if search by date")
+          canSearch = false
+        }
+        else if(!this.year){
+          alert("Month field must must be filled if search by date")
+          canSearch = false
+        }
         fulldate = new Date(this.year, this.month-1, this.date); 
         fulldate = this.year +"-" + this.month + "-" + this.date;
-        console.log(fulldate);
+        alert(fulldate);
       }
+      // alert(fulldate);
       this.resetParameter();
       this.psrObj.in_param_1 = this.psr_no;
       this.psrObj.in_param_5 = this.isApproved;
@@ -339,7 +349,8 @@ export default {
       console.log(this.psrObj);
       
       this.psrObj.in_page = 1;
-      this.getPSR();
+      if(canSearch)
+        this.getPSR();
       console.log(this.psrs);
     } catch (err) {
       this.error = err.message;
