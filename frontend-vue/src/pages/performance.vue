@@ -56,7 +56,12 @@
 
           <template slot="content">
             <p class="category">Total Approved PO/TotalPO</p>
-            <h3 class="title">{{ totalPO - totalDeclinePO }}/{{ totalPO }}</h3>
+            <h3 class="title">
+              <span style="font-size: 30px">{{
+                totalPO - totalDeclinePO
+              }}</span>
+              /{{ totalPO }}
+            </h3>
           </template>
 
           <template slot="footer">
@@ -95,9 +100,19 @@
           </template>
 
           <template slot="footer">
-            <div class="stats">
-              <md-icon>date_range</md-icon>
-              {{ new Date().toLocaleString() }}
+            <div
+              class="stats"
+              :style="[
+                POefficiency >= kpi_efficiency
+                  ? { color: 'green' }
+                  : { color: '#FF0000' },
+              ]"
+              style="font-weight: bold"
+            >
+              <md-icon>{{
+                POefficiency >= kpi_efficiency ? "trending_up" : "trending_down"
+              }}</md-icon>
+              {{ Math.abs(POefficiency - kpi_efficiency) }}%
             </div>
           </template>
         </stats-card>
@@ -113,7 +128,10 @@
           <template slot="content">
             <p class="category">Total Approved PSR/Total PSR</p>
             <h3 class="title">
-              {{ totalPSR - totalDeclinePSR }}/{{ totalPSR }}
+              <span style="font-size: 30px">{{
+                totalPSR - totalDeclinePSR
+              }}</span
+              >/{{ totalPSR }}
             </h3>
           </template>
 
@@ -152,9 +170,21 @@
           </template>
 
           <template slot="footer">
-            <div class="stats">
-              <md-icon>date_range</md-icon>
-              {{ new Date().toLocaleString() }}
+            <div
+              class="stats"
+              :style="[
+                PSRefficiency >= kpi_efficiency
+                  ? { color: 'green' }
+                  : { color: '#FF0000' },
+              ]"
+              style="font-weight: bold"
+            >
+              <md-icon>{{
+                PSRefficiency >= kpi_efficiency
+                  ? "trending_up"
+                  : "trending_down"
+              }}</md-icon>
+              {{ Math.abs(PSRefficiency - kpi_efficiency) }}%
             </div>
           </template>
         </stats-card>
@@ -178,9 +208,19 @@
           </template>
 
           <template slot="footer">
-            <div class="stats">
-              <md-icon>access_time</md-icon>
-              {{ new Date().toLocaleString() }}
+            <div
+              class="stats"
+              :style="[
+                avg_po_approval > kpi_approval
+                  ? { color: '#FF0000' }
+                  : { color: 'green' }
+              ]"
+              style="font-weight: bold"
+            >
+              <md-icon>{{
+                avg_po_approval > kpi_approval ? "trending_down" : "trending_up"
+              }}</md-icon>
+              {{ Math.abs(avg_po_approval - kpi_approval) }} min
             </div>
           </template>
         </chart-card>
@@ -226,9 +266,19 @@
           </template>
 
           <template slot="footer">
-            <div class="stats">
-              <md-icon>access_time</md-icon>
-              {{ new Date().toLocaleString() }}
+            <div
+              class="stats"
+              :style="[
+                avg_po_pending1 > kpi_pending1
+                  ? { color: '#FF0000' }
+                  : { color: 'green' }
+              ]"
+              style="font-weight: bold"
+            >
+              <md-icon>{{
+                avg_po_pending1 > kpi_pending1 ? "trending_down" : "trending_up"
+              }}</md-icon>
+              {{ Math.abs(avg_po_pending1 - kpi_pending1) }} min
             </div>
           </template>
         </chart-card>
@@ -251,9 +301,19 @@
           </template>
 
           <template slot="footer">
-            <div class="stats">
-              <md-icon>access_time</md-icon>
-              {{ new Date().toLocaleString() }}
+            <div
+              class="stats"
+              :style="[
+                avg_po_pending2 > kpi_pending2
+                  ? { color: '#FF0000' }
+                  : { color: 'green' }
+              ]"
+              style="font-weight: bold"
+            >
+              <md-icon>{{
+                avg_po_pending2 > kpi_pending2 ? "trending_down" : "trending_up"
+              }}</md-icon>
+              {{ Math.abs(avg_po_pending2 - kpi_pending2) }} min
             </div>
           </template>
         </chart-card>
@@ -278,9 +338,19 @@
           </template>
 
           <template slot="footer">
-            <div class="stats">
-              <md-icon>access_time</md-icon>
-              {{ new Date().toLocaleString() }}
+            <div
+              class="stats"
+              :style="[
+                avg_psr_approval > kpi_approval
+                  ? { color: '#FF0000' }
+                  : { color: 'green' }
+              ]"
+              style="font-weight: bold"
+            >
+              <md-icon>{{
+                avg_psr_approval > kpi_approval ? "trending_down" : "trending_up"
+              }}</md-icon>
+              {{ Math.abs(avg_psr_approval - kpi_approval) }} min
             </div>
           </template>
         </chart-card>
@@ -326,9 +396,19 @@
           </template>
 
           <template slot="footer">
-            <div class="stats">
-              <md-icon>access_time</md-icon>
-              {{ new Date().toLocaleString() }}
+            <div
+              class="stats"
+              :style="[
+                avg_psr_pending1 > kpi_pending1
+                  ? { color: '#FF0000' }
+                  : { color: 'green' }
+              ]"
+              style="font-weight: bold"
+            >
+              <md-icon>{{
+                avg_psr_pending1 > kpi_pending1 ? "trending_down" : "trending_up"
+              }}</md-icon>
+              {{ Math.abs(avg_psr_pending1 - kpi_pending1) }} min
             </div>
           </template>
         </chart-card>
@@ -351,9 +431,19 @@
           </template>
 
           <template slot="footer">
-            <div class="stats">
-              <md-icon>access_time</md-icon>
-              {{ new Date().toLocaleString() }}
+            <div
+              class="stats"
+              :style="[
+                avg_psr_pending2 > kpi_pending2
+                  ? { color: '#FF0000' }
+                  : { color: 'green' }
+              ]"
+              style="font-weight: bold"
+            >
+              <md-icon>{{
+                avg_psr_pending2 > kpi_pending2 ? "trending_down" : "trending_up"
+              }}</md-icon>
+              {{ Math.abs(avg_psr_pending2 - kpi_pending2) }} min
             </div>
           </template>
         </chart-card>
