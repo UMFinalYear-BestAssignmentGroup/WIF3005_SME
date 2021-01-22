@@ -56,7 +56,7 @@ const routes = [{
                 component: enterPSR
             },
             {
-                path: "/overallperformance/:id",
+                path: "/overallPerformance/:id",
                 name: "Overall Performance",
                 component: performance
             },
