@@ -243,6 +243,21 @@
             </md-card-actions>
           </div>
           
+          <!--{{Dialog for decline reason}} -->
+        <md-dialog :md-active.sync="isComponentModalActive" style="width:30%; overflow:auto;">
+          <md-dialog-title>
+            Confirm to decline?
+          </md-dialog-title>
+          <md-content style="margin-left:5%">
+              <md-textarea v-model="reason" style="width:93%;" placeholder="State the decline reason"></md-textarea>
+              <div class="error" v-if="reason==null && isPosted">Reason is required</div>
+          </md-content>
+          <md-dialog-actions>
+            <md-button class="md-success" @click="isPosted=true; decline_po()">Submit</md-button>
+            <md-button class="md-danger" @click="isComponentModalActive = false; reason=null">Close</md-button>
+          </md-dialog-actions>
+        </md-dialog>
+
           <md-dialog :md-active.sync="showDialog" style="width:100%; overflow:auto;">
             <md-dialog-title>
               Purchase Order Details
@@ -414,6 +429,7 @@ export default {
       pos: [], //for po in pos {{po.[var name]}}
       page: 1,
       error: "",
+      reason: null,
       total_page: "",
       isNext: false,
       isPrevious: true,
@@ -423,7 +439,9 @@ export default {
       po_id: this.$route.params.po_no,
       status_t1: "",
       showDialog: false,
-      isLoading: false
+      isLoading: false,
+      isPosted: false,
+      isComponentModalActive: false
       // status_t1: ""
     };
   },
@@ -501,8 +519,11 @@ export default {
         this.$router.push({ path: `/notification/${this.id}` });
     },
     async decline_po() {
-      this.poObj.id = this.po_id;
+      if(this.reason!=null){
+      this.isComponentModalActive = false;
       try {
+      this.poObj.id = this.po_id;
+      this.poObj.decline_reason = this.reason;
         const data = await po.po_decline(this.poObj);
         console.log(data); //can be ignored
         this.$buefy.snackbar.open({
@@ -515,6 +536,9 @@ export default {
         this.$router.push({ path: `/notification/${this.id}` });
       } catch (err) {
         this.error = err.message;
+      }
+      }else{
+        this.isComponentModalActive = true;
       }
     },
     async get_pending() {
