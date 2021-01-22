@@ -193,6 +193,21 @@
         <!-- {{ psrs }} -->
         <br /><br /><br />
         
+        <!--{{Dialog for decline reason}} -->
+        <md-dialog :md-active.sync="isComponentModalActive" style="width:30%; overflow:auto;">
+          <md-dialog-title>
+            Confirm to decline?
+          </md-dialog-title>
+          <md-content style="margin-left:5%">
+              <md-textarea v-model="reason" style="width:93%;" placeholder="State the decline reason"></md-textarea>
+              <div class="error" v-if="reason==null && isPosted">Reason is required</div>
+          </md-content>
+          <md-dialog-actions>
+            <md-button class="md-success" @click="isPosted=true; decline_psr()">Submit</md-button>
+            <md-button class="md-danger" @click="isComponentModalActive = false; reason=null">Close</md-button>
+          </md-dialog-actions>
+        </md-dialog>
+
         <md-dialog :md-active.sync="showDialog" style="width:100%; overflow:auto;">
             <md-dialog-title>
               Purchase Order Details 
@@ -366,6 +381,7 @@ export default {
       psr_id: this.$route.params.psr_id,
       action: this.$route.params.action,
       error: "",
+      reason: null,
       status_t1: "",
       showDialog: false,
       totalPrice: 0,
@@ -374,6 +390,8 @@ export default {
       t3: localStorage.t3,
       dataBackgroundColor: "blue",
       isEmpty: false,
+      isPosted: false,
+      isComponentModalActive: false
     };
   },
   async created() {
@@ -441,8 +459,11 @@ export default {
       this.$router.push({ path: `/notification/${this.id}` });
     },
     async decline_psr() {
+      if(this.reason!=null){
+      this.isComponentModalActive = false;
       try {
         this.psrObj._id = this.psrs.id;
+        this.psrObj._decline_reason = this.reason;
         const data = await psr.psr_decline(this.psrObj);
         console.log(data); //can be ignored
         this.$buefy.snackbar.open({
@@ -456,6 +477,9 @@ export default {
       } catch (err) {
         this.error = err.message;
         alert(err);
+      }
+      }else{
+        this.isComponentModalActive = true;
       }
     },
     async get_pending() {
