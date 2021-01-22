@@ -7,6 +7,10 @@
         <!-- <md-icon>dashboard for admin and t4 user</md-icon> -->
         <p>Dashboard</p>
       </sidebar-link>
+      <sidebar-link v-if="t1 == 'true' || t2 == 'true' || t3 == 'true'" :to="{ name: 'Personal Performance', params: { id: this.id } }">
+        <!-- <md-icon>dashboard for admin and t4 user</md-icon> -->
+        <p>Dashboard</p>
+      </sidebar-link>
       <sidebar-link v-if="is_admin == 'true'" :to="{ name: 'Staff Registration', params: { id: this.id } }">
         <!-- <md-icon>dashboard</md-icon> -->
         <p>Register</p>
