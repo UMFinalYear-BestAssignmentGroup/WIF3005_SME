@@ -55,8 +55,43 @@
           </template>
 
           <template slot="content">
-            <p class="category">Total Approved PO</p>
-            <h3 class="title">{{ totalPO - totalDeclinePO }}</h3>
+            <p class="category">Total Approved PO/TotalPO</p>
+            <h3 class="title">{{ totalPO - totalDeclinePO }}/{{ totalPO }}</h3>
+          </template>
+
+          <template slot="footer">
+            <div class="stats">
+              <md-icon>date_range</md-icon>
+              {{ new Date().toLocaleString() }}
+            </div>
+          </template>
+        </stats-card>
+      </div>
+      <div
+        class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-25"
+      >
+        <stats-card
+          :data-background-color="[
+            POefficiency > kpi_efficiency ? 'green' : 'red'
+          ]"
+        >
+          <template slot="header">
+            <md-icon>work</md-icon>
+          </template>
+
+          <template slot="content">
+            <p class="category">Efficiency for PO Approval | KPI</p>
+            <h3 class="title">
+              <span
+                :style="[
+                  POefficiency > kpi_efficiency ? {} : { color: '#FF0000' },
+                ]"
+                style="font-size: 30px"
+                >{{ POefficiency }}%</span
+              >
+              |
+              {{ kpi_efficiency }}%
+            </h3>
           </template>
 
           <template slot="footer">
@@ -72,34 +107,13 @@
       >
         <stats-card data-background-color="orange">
           <template slot="header">
-            <md-icon>work</md-icon>
-          </template>
-
-          <template slot="content">
-            <p class="category">Efficiency for PO Approval</p>
-            <h3 class="title">{{ POefficiency }}%</h3>
-          </template>
-
-          <template slot="footer">
-            <div class="stats">
-              <md-icon>date_range</md-icon>
-              {{ new Date().toLocaleString() }}
-            </div>
-          </template>
-        </stats-card>
-      </div>
-      <div
-        class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-25"
-      >
-        <stats-card data-background-color="purple">
-          <template slot="header">
             <md-icon>article</md-icon>
           </template>
 
           <template slot="content">
-            <p class="category">Total Approved PSR</p>
+            <p class="category">Total Approved PSR/Total PSR</p>
             <h3 class="title">
-              {{ totalPSR - totalDeclinePSR }}
+              {{ totalPSR - totalDeclinePSR }}/{{ totalPSR }}
             </h3>
           </template>
 
@@ -114,14 +128,27 @@
       <div
         class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-25"
       >
-        <stats-card data-background-color="purple">
+        <stats-card
+          :data-background-color="[
+            POefficiency > kpi_efficiency ? 'green' : 'red'
+          ]"
+        >
           <template slot="header">
             <md-icon>work</md-icon>
           </template>
 
           <template slot="content">
             <p class="category">Efficiency for PSR Approval</p>
-            <h3 class="title">{{ PSRefficiency }}%</h3>
+            <h3 class="title">
+              <span
+                :style="[
+                  PSRefficiency > kpi_efficiency ? {} : { color: '#FF0000' },
+                ]"
+                style="font-size: 30px"
+                >{{ PSRefficiency }}%</span
+              >
+              | {{ kpi_efficiency }}%
+            </h3>
           </template>
 
           <template slot="footer">
@@ -164,7 +191,7 @@
           :chart-options="POdataDeclineChart.options"
           :chart-type="'Bar'"
           :key="componentKey"
-          data-background-color="red"
+          data-background-color="orange"
         >
           <template slot="content">
             <h4 class="title">PO Decline Per Month</h4>
@@ -187,7 +214,7 @@
           :chart-options="POpendingOneChart.options"
           :chart-type="'Line'"
           :key="componentKey"
-          data-background-color="green"
+          data-background-color="orange"
         >
           <template slot="content">
             <h4 class="title">Time Taken for PO Pending 1 (Min)</h4>
@@ -210,7 +237,7 @@
           :chart-options="POpendingTwoChart.options"
           :chart-type="'Line'"
           :key="componentKey"
-          data-background-color="blue"
+          data-background-color="orange"
         >
           <template slot="content">
             <h4 class="title">Time Taken for PO Pending 2 (Min)</h4>
@@ -258,7 +285,7 @@
           :chart-options="PSRdataDeclineChart.options"
           :chart-type="'Bar'"
           :key="componentKey"
-          data-background-color="red"
+          data-background-color="purple"
         >
           <template slot="content">
             <h4 class="title">PSR Decline Per Month</h4>
@@ -281,7 +308,7 @@
           :chart-options="PSRpendingOneChart.options"
           :chart-type="'Line'"
           :key="componentKey"
-          data-background-color="green"
+          data-background-color="purple"
         >
           <template slot="content">
             <h4 class="title">Time Taken for PSR Pending 1 (Min)</h4>
@@ -304,7 +331,7 @@
           :chart-options="PSRpendingTwoChart.options"
           :chart-type="'Line'"
           :key="componentKey"
-          data-background-color="blue"
+          data-background-color="purple"
         >
           <template slot="content">
             <h4 class="title">Time taken for PSR Pending 2 (Min)</h4>
@@ -416,6 +443,7 @@ export default {
       year: new Date().getFullYear(),
       performanceData: [],
       users: [],
+      kpi_efficiency: 82,
       totalPO: 0,
       totalPSR: 0,
       POefficiency: 0,
@@ -746,6 +774,7 @@ export default {
           this.performanceData = await performance.get_performance(this.year);
           this.getAllData(this.performanceData);
           const user = await performance.get_all_user_performance(this.year);
+          console.log(user);
           this.users = user.users;
           this.isLoading = false;
           this.isLoadingPage = false;
@@ -776,7 +805,7 @@ export default {
           data.overall[dataMonth].po_efficiency == null
             ? 0
             : parseInt(data.overall[dataMonth].po_efficiency);
-        if (data.overall[dataMonth].po_efficiency != null) {
+        if (parseInt(data.overall[dataMonth].psr_efficiency) != 0) {
           monthCount += 1;
         }
       }
@@ -811,7 +840,7 @@ export default {
           data.overall[dataMonth].psr_efficiency == null
             ? 0
             : parseInt(data.overall[dataMonth].psr_efficiency);
-        if (data.overall[dataMonth].psr_efficiency != null) {
+        if (parseInt(data.overall[dataMonth].psr_efficiency) != 0) {
           monthCount += 1;
         }
       }
