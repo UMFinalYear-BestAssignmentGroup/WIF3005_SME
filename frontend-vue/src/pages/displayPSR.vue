@@ -236,20 +236,20 @@
                         <td class="clsLabelDetails" colspan="2">
                             <h4>Name </h4>
                         </td>
-                        <td class="clsValueDetails" colspan="2">
-                            <h4>{{psrs.t2_user_psr.firstname}}{{psrs.t2_user_psr.lastname}}</h4>
+                        <td class="clsLabelDetails">
+                            <h4>Status </h4>
+                        </td>
+                        <td class="clsLabelDetails">
+                            <h4>Date Approved </h4>
                         </td>
                     </tr>
                     <tr v-if="psrs.t2_user_psr">
-                        <td class="clsLabelDetails">
-                            <h4>Status </h4>
+                        <td class="clsValueDetails" colspan="2">
+                            <h4>{{psrs.t2_user_psr.firstname}}{{psrs.t2_user_psr.lastname}}</h4>
                         </td>
                         <td class="clsValueDetails">
                             <h4 v-if="psrs.status_t1_1">Approved</h4>
                             <h4 v-else>Declined</h4>
-                        </td>
-                        <td class="clsLabelDetails">
-                            <h4>Date Approved </h4>
                         </td>
                         <td class="clsValueDetails">
                             <h4>{{psrs.date_pending_1 | moment("Do MMMM YYYY")}}</h4>
@@ -265,20 +265,20 @@
                         <td class="clsLabelDetails" colspan="2">
                             <h4>Name </h4>
                         </td>
-                        <td class="clsValueDetails" colspan="2">
-                            <h4>{{psrs.t3_user_psr.firstname}}{{psrs.t3_user_psr.lastname}}</h4>
+                        <td class="clsLabelDetails">
+                            <h4>Status </h4>
+                        </td>
+                        <td class="clsLabelDetails">
+                            <h4>Date Approved </h4>
                         </td>
                     </tr>
                     <tr v-if="psrs.t3_user_psr">
-                        <td class="clsLabelDetails">
-                            <h4>Status </h4>
+                        <td class="clsValueDetails" colspan="2">
+                            <h4>{{psrs.t3_user_psr.firstname}}{{psrs.t3_user_psr.lastname}}</h4>
                         </td>
                         <td class="clsValueDetails">
                             <h4 v-if="psrs.status_t1_2">Approved</h4>
                             <h4 v-else>Declined</h4>
-                        </td>
-                        <td class="clsLabelDetails">
-                            <h4>Date Approved </h4>
                         </td>
                         <td class="clsValueDetails">
                             <h4>{{psrs.date_pending_2 | moment("Do MMMM YYYY")}}</h4>
@@ -294,23 +294,45 @@
                         <td class="clsLabelDetails" colspan="2">
                             <h4>Name </h4>
                         </td>
-                        <td class="clsValueDetails" colspan="2">
-                            <h4>{{psrs.approver_psr.firstname}}{{psrs.approver_psr.lastname}}</h4>
+                        <td class="clsLabelDetails">
+                            <h4>Status </h4>
+                        </td>
+                        <td class="clsLabelDetails">
+                            <h4>Date Approved </h4>
                         </td>
                     </tr>
                     <tr v-if="psrs.approver_psr">
-                        <td class="clsLabelDetails">
-                            <h4>Status </h4>
+                        <td class="clsValueDetails" colspan="2">
+                            <h4>{{psrs.approver_psr.firstname}}{{psrs.approver_psr.lastname}}</h4>
                         </td>
                         <td class="clsValueDetails">
                             <h4 v-if="psrs.status_t2">Approved</h4>
                             <h4 v-else>Declined</h4>
                         </td>
-                        <td class="clsLabelDetails">
-                            <h4>Date Approved </h4>
-                        </td>
                         <td class="clsValueDetails">
                             <h4>{{psrs.date_approve | moment("Do MMMM YYYY")}}</h4>
+                        </td>
+                    </tr>
+                    <!-- Decline Details -->
+                    <tr v-if="psrs.status_decline" >
+                      <td class="clsHeader" colspan="4">
+                        <h4>Decline Details</h4>
+                      </td>
+                    </tr>
+                    <tr v-if="psrs.date_decline">
+                        <td class="clsLabelDetails" colspan="2">
+                            <h4>Date Declined </h4>
+                        </td>
+                        <td class="clsLabelDetails" colspan="2">
+                            <h4>Decline Reason </h4>
+                        </td>
+                    </tr>
+                    <tr v-if="psrs.date_decline">
+                        <td class="clsValueDetails" colspan="2">
+                            <h4>{{psrs.date_decline | moment("Do MMMM YYYY")}}</h4>
+                        </td>
+                        <td class="clsValueDetails" colspan="2">
+                            <h4>{{psrs.decline_reason}}</h4>
                         </td>
                     </tr>
               </table>
