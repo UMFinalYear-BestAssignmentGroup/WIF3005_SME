@@ -11,37 +11,42 @@
                     <col width="25%">
                     <col width="70%">
                     <tr>
-                        <td class="clsLabel">
+                        <td class="clsLabel" id="required">
                             Old Password:
                         </td>
                         <td class="clsValue">
                             <b-field>
                                 <b-input type="password" v-model="originalPassword"  style="width:70%"  password-reveal></b-input>
                             </b-field>
+                            <div class="error" v-if="!$v.originalPassword.required && isPosted">Password is required</div>
                         </td>
                     </tr>
                     <tr>
-                        <td class="clsLabel">
+                        <td class="clsLabel" id="required">
                             New Password:
                         </td>
                         <td class="clsValue">
                             <b-field>
                                 <b-input type="password" v-model="password"  style="width:70%"  password-reveal></b-input>
                             </b-field>
+                            <div class="error" v-if="!$v.password.required && isPosted">Password is required</div>
+                            <div class="error" v-if="!$v.password.minLength && isPosted">Password must have at least 8 characters</div>
                         </td>
                     </tr>
                     <tr>
-                        <td class="clsLabel">
+                        <td class="clsLabel" id="required">
                             Confirm New Password:
                         </td>
                         <td class="clsValue">
                             <b-field>
                                 <b-input type="password" v-model="confirmPassword" style="width:70%"  password-reveal></b-input>
                             </b-field>
+                            <div class="error" v-if="!$v.confirmPassword.sameAs && isPosted">Confirm Password field must same as Password</div>
                         </td>
                     </tr>
                     
                 </table>
+                <h4 class="content" style="font-weight: normal;"><span style="color:red;margin-left:5%;">*</span> indicate required field</h4>
                 <br><br>
                 <md-button
                     class="md-raised md-success"
@@ -60,6 +65,7 @@
 <script>
 import user from "@/js/user.js"; //directory to user.js
 import userClass from "@/js/class/user_class.js"; //directory to psr_class.js
+import { required, minLength, sameAs, numeric } from 'vuelidate/lib/validators'
 // import admin from "@/js/admin.js"; //directory to admin.js
 export default {
     data(){
@@ -69,7 +75,8 @@ export default {
         password: '',
         confirmPassword: '',
         posted:false,
-        dataBackgroundColor: "blue"
+        dataBackgroundColor: "blue",
+        isPosted: false
         };
     },
   async created() {
@@ -82,6 +89,19 @@ export default {
     } catch (err) {
       this.error = err.message;
       alert(err);
+    }
+  },
+  validations: {
+    password: {
+      required,
+      minLength: minLength(8)
+    },confirmPassword: {
+      required,
+      connfirmPassword: minLength(8),
+      sameAsPassword: sameAs('password')
+    },
+    originalPassword: {
+        required
     }
   },
     methods: {
@@ -105,31 +125,34 @@ export default {
                 //     }
                 this.mapObj();
                 console.log(this.userObj);
-                try {
-                    const users = await user.reset_password(this.userObj);
-                    console.log(users); //can be ignored
-                    if(users.err){
-                        alert(users.err);
+                this.isPosted = true;
+                if (!this.$v.$invalid){
+                    try {
+                        const users = await user.reset_password(this.userObj);
+                        console.log(users); //can be ignored
+                        if(users.err){
+                            alert(users.err);
+                        }
+                        else{
+                            // this.posted = true;
+                            // alert("Success");
+                            this.$buefy.snackbar.open({
+                                duration: 5000,
+                                message: 'Password Reset',
+                                type: 'is-warning',
+                                position: 'is-top',
+                                actionText: 'Logout',
+                                onAction: () => {
+                                    this.logout();
+                                }
+                            })
+                                this.$router.push({ path: `/psrListing/${localStorage.id}` });
+                        }
+                        //add redirect to other page here
+                    } catch (err) {
+                        alert(err);
+                        this.error = err.message;
                     }
-                    else{
-                        // this.posted = true;
-                        // alert("Success");
-                        this.$buefy.snackbar.open({
-                            duration: 5000,
-                            message: 'Password Reset',
-                            type: 'is-warning',
-                            position: 'is-top',
-                            actionText: 'Logout',
-                            onAction: () => {
-                                this.logout();
-                            }
-                        })
-                            this.$router.push({ path: `/psrListing/${localStorage.id}` });
-                    }
-                    //add redirect to other page here
-                } catch (err) {
-                    alert(err);
-                    this.error = err.message;
                 }
             }
             else{
@@ -184,4 +207,8 @@ export default {
       padding: 0.5em 0.75em;
       vertical-align: top;
   }
+  #required:after { 
+    content:"*"; 
+    color: red;
+}
 </style>

@@ -8,7 +8,7 @@
       <md-card-expand>
         <md-card-actions md-alignment="space-between">
           <md-card-expand-trigger>
-            <md-button>Filter</md-button>
+            <md-button class="md-primary">Filter</md-button>
           </md-card-expand-trigger>
         </md-card-actions>
 
@@ -110,7 +110,7 @@
             </table>
             
         <md-card-actions md-alignment="right">
-            <md-button @click="filter()">Submit</md-button>
+            <md-button class="md-success" @click="filter()">Submit</md-button>
         </md-card-actions>
           </div>
         </md-card-content>
@@ -142,11 +142,15 @@
             </b-table-column>
             <b-table-column field="is_approved" label="Is Approved" centered="">
               <!-- {{ props.row.status }}  -->
-              <span v-if="props.row.status" style="font-size: 2em; color: #84f092;">
+              {{props.row.status}}
+              <span v-if="props.row.status == true" style="font-size: 2em; color: #84f092;">
                 <i class="far fa-check-circle"></i>
               </span>
-              <span v-else style="font-size: 2em; color: #f72828;">
+              <span v-else-if="props.row.status == false" style="font-size: 2em; color: #f72828;">
                 <i class="far fa-times-circle"></i>
+              </span>
+              <span v-else style="font-size: 2em; color: #f72828;">
+                <i class="far fa-hourglass-start"></i>
               </span>
             </b-table-column>
           </template>
@@ -281,6 +285,7 @@ export default {
     },
     async filter(){
       var fulldate = null;
+      var canSearch = true;
       try {
         if(this.poNo == "")
           this.poNo = null;
@@ -296,6 +301,14 @@ export default {
           this.companyName = null;
         //testing starts
         if(this.date){
+          if(!this.month){
+            alert("Month field must must be filled if search by date")
+            canSearch = false
+          }
+          else if(!this.year){
+            alert("Month field must must be filled if search by date")
+            canSearch = false
+          }
           fulldate = new Date(this.year, this.month-1, this.date); 
           fulldate = this.year +"-" + this.month + "-" + this.date;
           console.log(fulldate);
@@ -313,7 +326,8 @@ export default {
           this.poObj.in_param_3 = fulldate;
 
         console.log(this.poObj);
-        this.getPO();
+        if(canSearch)
+          this.getPO();
         // this.poObj.in_page = 1;
         // const data = await po.po_search(this.poObj.toJson());
         // console.log(data);
