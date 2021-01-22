@@ -57,7 +57,7 @@ const routes = [
       },
       {
         path: "/performance/:id",
-        name: "Performance",
+        name: "Overall Performance",
         component: performance
       },
       {
