@@ -34,6 +34,7 @@ import passwordRecovery from "@/pages/passwordRecovery.vue";
 import performance from "@/pages/performance.vue";
 import userPerformance from "@/pages/userPerformance.vue";
 import personalPerformance from "@/pages/personalPerformance.vue";
+import performanceDashboard from "@/pages/performanceDashboard.vue";
 
 const routes = [{
         path: "/",
@@ -69,6 +70,11 @@ const routes = [{
                 path: "/personalPerformance/:id",
                 name: "Personal Performance",
                 component: personalPerformance
+            },
+            {
+                path: "/performanceDashboard/:id",
+                name: "Performance Dashboard",
+                component: performanceDashboard
             },
             {
                 path: "/resetPassword/:id",

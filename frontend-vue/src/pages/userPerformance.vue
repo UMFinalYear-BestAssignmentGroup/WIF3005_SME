@@ -6,7 +6,14 @@
       >
         <router-link
           style="margin-left: 10px; font-size: 18px; font-weight: 400"
-          :to="dashboardURL"
+           v-if="t4 == 'true'"
+          :to="dashboardURL2"
+          >Dashboard</router-link
+        >
+        <router-link
+          style="margin-left: 10px; font-size: 18px; font-weight: 400"
+           v-if="t4 == 'false'"
+          :to="dashboardURL1"
           >Dashboard</router-link
         >
         <span style="font-size: 18px; font-weight: 400">
@@ -413,6 +420,7 @@ export default {
       isLoading: false,
       isLoadingPage: false,
       id: localStorage.id,
+      t4: localStorage.t4,
       year: new Date().getFullYear(),
       usersData: [],
       userName: "",
@@ -430,6 +438,8 @@ export default {
       componentKey: 0,
       error: "",
       isPosted: false,
+      dashboardURL1: "",
+      dashboardURL2: "",
 
       POpendingOneChart: {
         data: {
@@ -657,7 +667,8 @@ export default {
       this.isLoading = true;
       this.isLoadingPage = true;
       this.user_id = this.$route.params.user_id;
-      this.dashboardURL = "/overallPerformance/" + this.id;
+      this.dashboardURL1 = "/overallPerformance/" + this.id;
+      this.dashboardURL2 = "/performanceDashboard/" + this.id;
       const data = await performance.get_all_user_performance(this.year);
       this.usersData = data.user_data;
       await this.get_performance_data(this.usersData);
