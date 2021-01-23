@@ -220,7 +220,7 @@
               <md-icon>{{
                 avg_po_approval > kpi_approval ? "trending_down" : "trending_up"
               }}</md-icon>
-              {{ Math.abs(avg_po_approval - kpi_approval) }} min
+              {{ Math.abs(avg_po_approval - kpi_approval).toFixed(2) }} min
             </div>
           </template>
         </chart-card>
@@ -278,7 +278,7 @@
               <md-icon>{{
                 avg_po_pending1 > kpi_pending1 ? "trending_down" : "trending_up"
               }}</md-icon>
-              {{ Math.abs(avg_po_pending1 - kpi_pending1) }} min
+              {{ Math.abs(avg_po_pending1 - kpi_pending1).toFixed(2) }} min
             </div>
           </template>
         </chart-card>
@@ -313,7 +313,7 @@
               <md-icon>{{
                 avg_po_pending2 > kpi_pending2 ? "trending_down" : "trending_up"
               }}</md-icon>
-              {{ Math.abs(avg_po_pending2 - kpi_pending2) }} min
+              {{ Math.abs(avg_po_pending2 - kpi_pending2).toFixed(2) }} min
             </div>
           </template>
         </chart-card>
@@ -350,7 +350,7 @@
               <md-icon>{{
                 avg_psr_approval > kpi_approval ? "trending_down" : "trending_up"
               }}</md-icon>
-              {{ Math.abs(avg_psr_approval - kpi_approval) }} min
+              {{ Math.abs(avg_psr_approval - kpi_approval).toFixed(2) }} min
             </div>
           </template>
         </chart-card>
@@ -408,7 +408,7 @@
               <md-icon>{{
                 avg_psr_pending1 > kpi_pending1 ? "trending_down" : "trending_up"
               }}</md-icon>
-              {{ Math.abs(avg_psr_pending1 - kpi_pending1) }} min
+              {{ Math.abs(avg_psr_pending1 - kpi_pending1).toFixed(2) }} min
             </div>
           </template>
         </chart-card>
@@ -443,7 +443,7 @@
               <md-icon>{{
                 avg_psr_pending2 > kpi_pending2 ? "trending_down" : "trending_up"
               }}</md-icon>
-              {{ Math.abs(avg_psr_pending2 - kpi_pending2) }} min
+              {{ Math.abs(avg_psr_pending2 - kpi_pending2).toFixed(2) }} min
             </div>
           </template>
         </chart-card>
