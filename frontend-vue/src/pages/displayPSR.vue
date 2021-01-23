@@ -433,7 +433,7 @@ export default {
     },
     async get_pending() {
       try {
-        const data = await po.get_submits(this.page);
+        const data = await psr.get_submits(this.page);
 
         const pos1 = data.result[0];
         this.total_page = data.result[1];
@@ -448,7 +448,7 @@ export default {
     },
     async get_submits() {
       try {
-        const data = await po.get_pending(this.page);
+        const data = await psr.get_pending(this.page);
 
         const pos1 = data.result[0];
         this.total_page = data.result[1];
@@ -461,7 +461,7 @@ export default {
     },
     async find() {
       try {
-        const data = await po.find(this.po_no);
+        const data = await psr.find(this.psr_no);
         this.pos = data.map(pos => ({
           ...pos,
           createdAt: new Date(pos.createdAt)
@@ -480,7 +480,7 @@ export default {
       } else this.page += 1;
       if (this.page == this.total_page) this.isNext = true;
       try {
-        const data = await po.show_po_page(this.page);
+        const data = await psr.show_psr_page(this.page);
 
         const pos1 = data.result[0];
         this.total_page = data.result[1];
@@ -499,7 +499,7 @@ export default {
       } else this.page -= 1;
       if (this.page == 1) this.isPrevious = true;
       try {
-        const data = await po.show_po_page(this.page);
+        const data = await psr.show_psr_page(this.page);
 
         const pos1 = data.result[0];
         this.total_page = data.result[1];
@@ -519,7 +519,7 @@ export default {
         this.isPrevious = false;
       } else this.page = 1;
       try {
-        const data = await po.show_po_page(this.page);
+        const data = await psr.show_psr_page(this.page);
 
         const pos1 = data.result[0];
         this.total_page = data.result[1];

@@ -187,7 +187,7 @@
 </template>
 
 <script>
-import user from "@/js/po.js"; //directory to po.js
+// import user from "@/js/po.js"; //directory to po.js
 export default {
   data() {
     return {

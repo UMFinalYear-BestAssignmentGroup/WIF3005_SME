@@ -350,7 +350,7 @@ import { required } from "vuelidate/lib/validators";
 
 export default {
   data() {
-    let dateFormat = this.$material.locale.dateFormat || "yyyy-MM-dd";
+    // let dateFormat = this.$material.locale.dateFormat || "yyyy-MM-dd";
     return {
       dataBackgroundColor: "blue",
       isEmpty: false,
@@ -450,7 +450,7 @@ export default {
       var today = new Date();
       var Difference_In_Time = new Date(this.date_req) - today;
       // To calculate the no. of days between two dates
-      var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+      // var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
       if (!this.$v.$invalid) {
         if (Difference_In_Time > 0) this.step++;
         else alert("Required date must later than todays date");

@@ -242,7 +242,7 @@
 <script>
 import admin from "@/js/admin.js"; //directory to leave.js
 import userClass from "@/js/class/user_class.js"; //directory to user_class.js
-import { required, minLength, sameAs, requiredUnless } from 'vuelidate/lib/validators'
+import { required, requiredUnless } from 'vuelidate/lib/validators'
 export default {
   name: "notify-leave",
   data() {
@@ -255,8 +255,6 @@ export default {
       error: "",
       isLoading: false,
       id: localStorage.id,
-      isEmpty: false,
-      dataBackgroundColor: "blue",
       firstname: '',
       lastname:'',
       username: '',
@@ -341,7 +339,8 @@ export default {
       this.isLoading = true;
       this.userObj.id = this.$route.params.user_id;
       // alert(this.userObj.id);
-      const data = await admin.del_user(this.userObj.toJson());
+      // const data = await admin.del_user(this.userObj.toJson());
+      await admin.del_user(this.userObj.toJson());
       console.log("Deleting User:");
       localStorage.message = "User Profile Deleted";
       this.isLoading =  false;

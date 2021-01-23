@@ -67,7 +67,7 @@
 
 <script>
 import po from "@/js/po.js"; //directory to po.js
-import user from "@/js/user.js"; //directory to user.js
+// import user from "@/js/user.js"; //directory to user.js
 import poClass from "@/js/class/po_class.js"; //directory to po_class.js
 
 export default {
