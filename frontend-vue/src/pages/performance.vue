@@ -55,7 +55,7 @@
           </template>
 
           <template slot="content">
-            <p class="category">Total Approved PO/TotalPO</p>
+            <p class="category">Total Approved PO / Total PO</p>
             <h3 class="title">
               <span style="font-size: 30px">{{
                 totalPO - totalDeclinePO
@@ -85,7 +85,7 @@
           </template>
 
           <template slot="content">
-            <p class="category">Efficiency for PO Approval | KPI</p>
+            <p class="category">Efficiency for PO Approval</p>
             <h3 class="title">
               <span
                 :style="[
@@ -94,8 +94,10 @@
                 style="font-size: 30px"
                 >{{ POefficiency }}%</span
               >
-              |
-              {{ kpi_efficiency }}%
+              <span>
+                <br />
+                <small>Target: {{ kpi_efficiency }}%</small>
+              </span>
             </h3>
           </template>
 
@@ -109,9 +111,18 @@
               ]"
               style="font-weight: bold"
             >
-              <md-icon>{{
-                POefficiency >= kpi_efficiency ? "trending_up" : "trending_down"
-              }}</md-icon>
+              <md-icon
+                :style="[
+                  POefficiency >= kpi_efficiency
+                    ? { color: 'green' }
+                    : { color: '#FF0000' },
+                ]"
+                >{{
+                  POefficiency >= kpi_efficiency
+                    ? "trending_up"
+                    : "trending_down"
+                }}</md-icon
+              >
               {{ Math.abs(POefficiency - kpi_efficiency) }}%
             </div>
           </template>
@@ -126,7 +137,7 @@
           </template>
 
           <template slot="content">
-            <p class="category">Total Approved PSR/Total PSR</p>
+            <p class="category">Total Approved PSR / Total PSR</p>
             <h3 class="title">
               <span style="font-size: 30px">{{
                 totalPSR - totalDeclinePSR
@@ -156,7 +167,7 @@
           </template>
 
           <template slot="content">
-            <p class="category">Efficiency for PSR Approval | KPI</p>
+            <p class="category">Efficiency for PSR Approval</p>
             <h3 class="title">
               <span
                 :style="[
@@ -165,7 +176,10 @@
                 style="font-size: 30px"
                 >{{ PSRefficiency }}%</span
               >
-              | {{ kpi_efficiency }}%
+              <span>
+                <br />
+                <small>Target: {{ kpi_efficiency }}%</small>
+              </span>
             </h3>
           </template>
 
@@ -179,11 +193,18 @@
               ]"
               style="font-weight: bold"
             >
-              <md-icon>{{
-                PSRefficiency >= kpi_efficiency
-                  ? "trending_up"
-                  : "trending_down"
-              }}</md-icon>
+              <md-icon
+                :style="[
+                  PSRefficiency >= kpi_efficiency
+                    ? { color: 'green' }
+                    : { color: '#FF0000' },
+                ]"
+                >{{
+                  PSRefficiency >= kpi_efficiency
+                    ? "trending_up"
+                    : "trending_down"
+                }}</md-icon
+              >
               {{ Math.abs(PSRefficiency - kpi_efficiency) }}%
             </div>
           </template>
@@ -213,13 +234,22 @@
               :style="[
                 avg_po_approval > kpi_approval
                   ? { color: '#FF0000' }
-                  : { color: 'green' }
+                  : { color: 'green' },
               ]"
               style="font-weight: bold"
             >
-              <md-icon>{{
-                avg_po_approval > kpi_approval ? "trending_down" : "trending_up"
-              }}</md-icon>
+              <md-icon
+                :style="[
+                  avg_po_approval > kpi_approval
+                    ? { color: '#FF0000' }
+                    : { color: 'green' },
+                ]"
+                >{{
+                  avg_po_approval > kpi_approval
+                    ? "trending_down"
+                    : "trending_up"
+                }}</md-icon
+              >
               {{ Math.abs(avg_po_approval - kpi_approval).toFixed(2) }} min
             </div>
           </template>
@@ -271,13 +301,22 @@
               :style="[
                 avg_po_pending1 > kpi_pending1
                   ? { color: '#FF0000' }
-                  : { color: 'green' }
+                  : { color: 'green' },
               ]"
               style="font-weight: bold"
             >
-              <md-icon>{{
-                avg_po_pending1 > kpi_pending1 ? "trending_down" : "trending_up"
-              }}</md-icon>
+              <md-icon
+                :style="[
+                  avg_po_pending1 > kpi_pending1
+                    ? { color: '#FF0000' }
+                    : { color: 'green' },
+                ]"
+                >{{
+                  avg_po_pending1 > kpi_pending1
+                    ? "trending_down"
+                    : "trending_up"
+                }}</md-icon
+              >
               {{ Math.abs(avg_po_pending1 - kpi_pending1).toFixed(2) }} min
             </div>
           </template>
@@ -306,13 +345,22 @@
               :style="[
                 avg_po_pending2 > kpi_pending2
                   ? { color: '#FF0000' }
-                  : { color: 'green' }
+                  : { color: 'green' },
               ]"
               style="font-weight: bold"
             >
-              <md-icon>{{
-                avg_po_pending2 > kpi_pending2 ? "trending_down" : "trending_up"
-              }}</md-icon>
+              <md-icon
+                :style="[
+                  avg_po_pending2 > kpi_pending2
+                    ? { color: '#FF0000' }
+                    : { color: 'green' },
+                ]"
+                >{{
+                  avg_po_pending2 > kpi_pending2
+                    ? "trending_down"
+                    : "trending_up"
+                }}</md-icon
+              >
               {{ Math.abs(avg_po_pending2 - kpi_pending2).toFixed(2) }} min
             </div>
           </template>
@@ -343,13 +391,22 @@
               :style="[
                 avg_psr_approval > kpi_approval
                   ? { color: '#FF0000' }
-                  : { color: 'green' }
+                  : { color: 'green' },
               ]"
               style="font-weight: bold"
             >
-              <md-icon>{{
-                avg_psr_approval > kpi_approval ? "trending_down" : "trending_up"
-              }}</md-icon>
+              <md-icon
+                :style="[
+                  avg_psr_approval > kpi_approval
+                    ? { color: '#FF0000' }
+                    : { color: 'green' },
+                ]"
+                >{{
+                  avg_psr_approval > kpi_approval
+                    ? "trending_down"
+                    : "trending_up"
+                }}</md-icon
+              >
               {{ Math.abs(avg_psr_approval - kpi_approval).toFixed(2) }} min
             </div>
           </template>
@@ -401,13 +458,22 @@
               :style="[
                 avg_psr_pending1 > kpi_pending1
                   ? { color: '#FF0000' }
-                  : { color: 'green' }
+                  : { color: 'green' },
               ]"
               style="font-weight: bold"
             >
-              <md-icon>{{
-                avg_psr_pending1 > kpi_pending1 ? "trending_down" : "trending_up"
-              }}</md-icon>
+              <md-icon
+                :style="[
+                  avg_psr_pending1 > kpi_pending1
+                    ? { color: '#FF0000' }
+                    : { color: 'green' },
+                ]"
+                >{{
+                  avg_psr_pending1 > kpi_pending1
+                    ? "trending_down"
+                    : "trending_up"
+                }}</md-icon
+              >
               {{ Math.abs(avg_psr_pending1 - kpi_pending1).toFixed(2) }} min
             </div>
           </template>
@@ -436,13 +502,22 @@
               :style="[
                 avg_psr_pending2 > kpi_pending2
                   ? { color: '#FF0000' }
-                  : { color: 'green' }
+                  : { color: 'green' },
               ]"
               style="font-weight: bold"
             >
-              <md-icon>{{
-                avg_psr_pending2 > kpi_pending2 ? "trending_down" : "trending_up"
-              }}</md-icon>
+              <md-icon
+                :style="[
+                  avg_psr_pending2 > kpi_pending2
+                    ? { color: '#FF0000' }
+                    : { color: 'green' },
+                ]"
+                >{{
+                  avg_psr_pending2 > kpi_pending2
+                    ? "trending_down"
+                    : "trending_up"
+                }}</md-icon
+              >
               {{ Math.abs(avg_psr_pending2 - kpi_pending2).toFixed(2) }} min
             </div>
           </template>
