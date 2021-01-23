@@ -127,20 +127,44 @@
       <div
         class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-25"
       >
-        <stats-card data-background-color="orange">
+        <stats-card
+          :data-background-color="[
+            POefficiency >= kpi_efficiency ? 'green' : 'red',
+          ]"
+        >
           <template slot="header">
             <md-icon>work</md-icon>
           </template>
 
           <template slot="content">
             <p class="category">Efficiency for PO Approval</p>
-            <h3 class="title">{{ POefficiency }}%</h3>
+            <h3 class="title">
+              <span
+                :style="[
+                  POefficiency >= kpi_efficiency ? {} : { color: '#FF0000' },
+                ]"
+                style="font-size: 30px"
+                >{{ POefficiency }}%
+              </span>
+              |
+              {{ kpi_efficiency }}%
+            </h3>
           </template>
 
           <template slot="footer">
-            <div class="stats">
-              <md-icon>date_range</md-icon>
-              {{ new Date().toLocaleString() }}
+            <div
+              class="stats"
+              :style="[
+                POefficiency >= kpi_efficiency
+                  ? { color: 'green' }
+                  : { color: '#FF0000' },
+              ]"
+              style="font-weight: bold"
+            >
+              <md-icon>{{
+                POefficiency >= kpi_efficiency ? "trending_up" : "trending_down"
+              }}</md-icon>
+              {{ Math.abs(POefficiency - kpi_efficiency) }}%
             </div>
           </template>
         </stats-card>
@@ -221,13 +245,34 @@
 
           <template slot="content">
             <p class="category">Efficiency for PSR Approval</p>
-            <h3 class="title">{{ PSRefficiency }}%</h3>
+            <h3 class="title">
+              <span
+                :style="[
+                  PSRefficiency >= kpi_efficiency ? {} : { color: '#FF0000' },
+                ]"
+                style="font-size: 30px"
+                >{{ PSRefficiency }}%</span
+              >
+              | {{ kpi_efficiency }}%
+            </h3>
           </template>
 
           <template slot="footer">
-            <div class="stats">
-              <md-icon>date_range</md-icon>
-              {{ new Date().toLocaleString() }}
+            <div
+              class="stats"
+              :style="[
+                PSRefficiency >= kpi_efficiency
+                  ? { color: 'green' }
+                  : { color: '#FF0000' },
+              ]"
+              style="font-weight: bold"
+            >
+              <md-icon>{{
+                PSRefficiency >= kpi_efficiency
+                  ? "trending_up"
+                  : "trending_down"
+              }}</md-icon>
+              {{ Math.abs(PSRefficiency - kpi_efficiency) }}%
             </div>
           </template>
         </stats-card>
@@ -242,7 +287,9 @@
             :chart-responsive-options="POapprovalChart.responsiveOptions"
             :chart-type="'Bar'"
             :key="componentKey"
-            data-background-color="orange"
+            :data-background-color="[
+              avg_po_approval > kpi_approval ? 'red' : 'orange',
+            ]"
           >
             <template slot="content">
               <h4 class="title">Time Taken for PO Approval Per Month (Min)</h4>
@@ -250,9 +297,21 @@
             </template>
 
             <template slot="footer">
-              <div class="stats">
-                <md-icon>access_time</md-icon>
-                {{ new Date().toLocaleString() }}
+              <div
+                class="stats"
+                :style="[
+                  avg_po_approval > kpi_approval
+                    ? { color: '#FF0000' }
+                    : { color: 'green' },
+                ]"
+                style="font-weight: bold"
+              >
+                <md-icon>{{
+                  avg_po_approval > kpi_approval
+                    ? "trending_down"
+                    : "trending_up"
+                }}</md-icon>
+                {{ Math.abs(avg_po_approval - kpi_approval) }} min
               </div>
             </template>
           </chart-card>
@@ -268,7 +327,9 @@
             :chart-options="POpendingOneChart.options"
             :chart-type="'Line'"
             :key="componentKey"
-            data-background-color="orange"
+            :data-background-color="[
+              avg_po_pending1 > kpi_pending1 ? 'red' : 'orange',
+            ]"
           >
             <template slot="content">
               <h4 class="title">Time Taken for PO Pending 1 (Min)</h4>
@@ -276,9 +337,21 @@
             </template>
 
             <template slot="footer">
-              <div class="stats">
-                <md-icon>access_time</md-icon>
-                {{ new Date().toLocaleString() }}
+              <div
+                class="stats"
+                :style="[
+                  avg_po_pending1 > kpi_pending1
+                    ? { color: '#FF0000' }
+                    : { color: 'green' },
+                ]"
+                style="font-weight: bold"
+              >
+                <md-icon>{{
+                  avg_po_pending1 > kpi_pending1
+                    ? "trending_down"
+                    : "trending_up"
+                }}</md-icon>
+                {{ Math.abs(avg_po_pending1 - kpi_pending1) }} min
               </div>
             </template>
           </chart-card>
@@ -293,7 +366,9 @@
             :chart-options="POpendingTwoChart.options"
             :chart-type="'Line'"
             :key="componentKey"
-            data-background-color="orange"
+            :data-background-color="[
+              avg_po_pending2 > kpi_pending2 ? 'red' : 'orange',
+            ]"
           >
             <template slot="content">
               <h4 class="title">Time Taken for PO Pending 2 (Min)</h4>
@@ -301,9 +376,21 @@
             </template>
 
             <template slot="footer">
-              <div class="stats">
-                <md-icon>access_time</md-icon>
-                {{ new Date().toLocaleString() }}
+              <div
+                class="stats"
+                :style="[
+                  avg_po_pending2 > kpi_pending2
+                    ? { color: '#FF0000' }
+                    : { color: 'green' },
+                ]"
+                style="font-weight: bold"
+              >
+                <md-icon>{{
+                  avg_po_pending2 > kpi_pending2
+                    ? "trending_down"
+                    : "trending_up"
+                }}</md-icon>
+                {{ Math.abs(avg_po_pending2 - kpi_pending2) }} min
               </div>
             </template>
           </chart-card>
@@ -319,7 +406,9 @@
             :chart-responsive-options="PSRapprovalChart.responsiveOptions"
             :chart-type="'Bar'"
             :key="componentKey"
-            data-background-color="purple"
+            :data-background-color="[
+              avg_psr_approval > kpi_approval ? 'red' : 'purple',
+            ]"
           >
             <template slot="content">
               <h4 class="title">Time Taken for PSR Approval Per Month (Min)</h4>
@@ -327,9 +416,21 @@
             </template>
 
             <template slot="footer">
-              <div class="stats">
-                <md-icon>access_time</md-icon>
-                {{ new Date().toLocaleString() }}
+              <div
+                class="stats"
+                :style="[
+                  avg_psr_approval > kpi_approval
+                    ? { color: '#FF0000' }
+                    : { color: 'green' },
+                ]"
+                style="font-weight: bold"
+              >
+                <md-icon>{{
+                  avg_psr_approval > kpi_approval
+                    ? "trending_down"
+                    : "trending_up"
+                }}</md-icon>
+                {{ Math.abs(avg_psr_approval - kpi_approval) }} min
               </div>
             </template>
           </chart-card>
@@ -345,7 +446,9 @@
             :chart-options="PSRpendingOneChart.options"
             :chart-type="'Line'"
             :key="componentKey"
-            data-background-color="purple"
+            :data-background-color="[
+              avg_psr_pending1 > kpi_pending1 ? 'red' : 'purple',
+            ]"
           >
             <template slot="content">
               <h4 class="title">Time Taken for PSR Pending 1 (Min)</h4>
@@ -353,9 +456,21 @@
             </template>
 
             <template slot="footer">
-              <div class="stats">
-                <md-icon>access_time</md-icon>
-                {{ new Date().toLocaleString() }}
+              <div
+                class="stats"
+                :style="[
+                  avg_psr_pending1 > kpi_pending1
+                    ? { color: '#FF0000' }
+                    : { color: 'green' },
+                ]"
+                style="font-weight: bold"
+              >
+                <md-icon>{{
+                  avg_psr_pending1 > kpi_pending1
+                    ? "trending_down"
+                    : "trending_up"
+                }}</md-icon>
+                {{ Math.abs(avg_psr_pending1 - kpi_pending1) }} min
               </div>
             </template>
           </chart-card>
@@ -370,7 +485,9 @@
             :chart-options="PSRpendingTwoChart.options"
             :chart-type="'Line'"
             :key="componentKey"
-            data-background-color="purple"
+            :data-background-color="[
+              avg_psr_pending2 > kpi_pending2 ? 'red' : 'purple',
+            ]"
           >
             <template slot="content">
               <h4 class="title">Time Taken for PSR Pending 2 (Min)</h4>
@@ -378,9 +495,21 @@
             </template>
 
             <template slot="footer">
-              <div class="stats">
-                <md-icon>access_time</md-icon>
-                {{ new Date().toLocaleString() }}
+              <div
+                class="stats"
+                :style="[
+                  avg_psr_pending2 > kpi_pending2
+                    ? { color: '#FF0000' }
+                    : { color: 'green' },
+                ]"
+                style="font-weight: bold"
+              >
+                <md-icon>{{
+                  avg_psr_pending2 > kpi_pending2
+                    ? "trending_down"
+                    : "trending_up"
+                }}</md-icon>
+                {{ Math.abs(avg_psr_pending2 - kpi_pending2) }} min
               </div>
             </template>
           </chart-card>
@@ -424,6 +553,16 @@ export default {
       componentKey: 0,
       error: "",
       isPosted: false,
+      kpi_efficiency: 82,
+      kpi_pending1: 900,
+      kpi_pending2: 800,
+      kpi_approval: 650,
+      avg_po_pending1: 0,
+      avg_po_pending2: 0,
+      avg_po_approval: 0,
+      avg_psr_pending1: 0,
+      avg_psr_pending2: 0,
+      avg_psr_approval: 0,
 
       POpendingOneChart: {
         data: {
@@ -722,7 +861,8 @@ export default {
     },
     async getPOData(data) {
       this.totalPO = 0;
-      this.totalSubmittedPO = data[0].po_total_submitted == null
+      this.totalSubmittedPO =
+        data[0].po_total_submitted == null
           ? 0
           : parseInt(data[0].po_total_submitted);
       let totalEfficiency = 0;
@@ -752,7 +892,8 @@ export default {
     },
     async getPSRData(data) {
       this.totalPSR = 0;
-      this.totalSubmittedPSR = data[0].psr_total_submitted == null
+      this.totalSubmittedPSR =
+        data[0].psr_total_submitted == null
           ? 0
           : parseInt(data[0].psr_total_submitted);
       let totalEfficiency = 0;
@@ -865,6 +1006,78 @@ export default {
       this.PSRapprovalChart.options.high = Math.max.apply(Math, series) + 50;
       this.forceRender();
     },
+    async getKPI(data) {
+      let po_pending1 = 0;
+      let po_pending2 = 0;
+      let po_approval = 0;
+      let psr_pending1 = 0;
+      let psr_pending2 = 0;
+      let psr_approval = 0;
+
+      this.avg_po_pending1 = 0;
+      this.avg_po_pending2 = 0;
+      this.avg_po_approval = 0;
+      this.avg_psr_pending1 = 0;
+      this.avg_psr_pending2 = 0;
+      this.avg_psr_approval = 0;
+
+      for (let dataMonth in data) {
+        po_pending1 +=
+          data[dataMonth].tmp_average_po.pending_1.minutes == null
+            ? 0
+            : parseInt(
+                data[dataMonth].tmp_average_po.pending_1.minutes
+              );
+        po_pending2 +=
+          data[dataMonth].tmp_average_po.pending_2.minutes == null
+            ? 0
+            : parseInt(
+                data[dataMonth].tmp_average_po.pending_2.minutes
+              );
+        po_approval +=
+          data[dataMonth].tmp_average_po.approve.minutes == null
+            ? 0
+            : parseInt(data[dataMonth].tmp_average_po.approve.minutes);
+
+        psr_pending1 +=
+          data[dataMonth].tmp_average_psr.pending_1.minutes == null
+            ? 0
+            : parseInt(
+                data[dataMonth].tmp_average_psr.pending_1.minutes
+              );
+        psr_pending2 +=
+          data[dataMonth].tmp_average_psr.pending_2.minutes == null
+            ? 0
+            : parseInt(
+                data[dataMonth].tmp_average_psr.pending_2.minutes
+              );
+        psr_approval +=
+          data[dataMonth].tmp_average_psr.approve.minutes == null
+            ? 0
+            : parseInt(data[dataMonth].tmp_average_psr.approve.minutes);
+      }
+      if (this.year == new Date().getFullYear()) {
+        this.avg_po_pending1 =
+          po_pending1 / parseInt(new Date().getMonth() + 1);
+        this.avg_po_pending2 =
+          po_pending2 / parseInt(new Date().getMonth() + 1);
+        this.avg_po_approval =
+          po_approval / parseInt(new Date().getMonth() + 1);
+        this.avg_psr_pending1 =
+          psr_pending1 / parseInt(new Date().getMonth() + 1);
+        this.avg_psr_pending2 =
+          psr_pending2 / parseInt(new Date().getMonth() + 1);
+        this.avg_psr_approval =
+          psr_approval / parseInt(new Date().getMonth() + 1);
+      } else if (this.year < new Date().getFullYear()) {
+        this.avg_po_pending1 = po_pending1 / 12;
+        this.avg_po_pending2 = po_pending2 / 12;
+        this.avg_po_approval = po_approval / 12;
+        this.avg_psr_pending1 = psr_pending1 / 12;
+        this.avg_psr_pending2 = psr_pending2 / 12;
+        this.avg_psr_approval = psr_approval / 12;
+      }
+    },
 
     forceRender() {
       this.componentKey += 1;
@@ -881,6 +1094,8 @@ export default {
       await this.getPSRApprovalseries(data);
       await this.getPSRPendingOneseries(data);
       await this.getPSRPendingTwoseries(data);
+
+      await this.getKPI(data);
     },
   },
   watch: {
