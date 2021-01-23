@@ -13,6 +13,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
     "@fortawesome/free-solid-svg-icons": "^5.14.0",
     "@fortawesome/vue-fontawesome": "^0.1.10",
+    "await-sleep": "0.0.1",
     "axios": "^0.21.1",
     "buefy": "^0.8.20",
     "chartist": "0.11.2",

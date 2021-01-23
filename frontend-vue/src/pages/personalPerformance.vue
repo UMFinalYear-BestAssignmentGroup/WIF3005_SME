@@ -586,6 +586,7 @@
 import performance from "@/js/performance.js";
 import { required } from "vuelidate/lib/validators";
 import { StatsCard, ChartCard } from "@/components";
+import sleep from "await-sleep";
 
 export default {
   name: "personal-performance",
@@ -859,18 +860,27 @@ export default {
       this.getAllData(this.performanceData);
       this.isLoading = false;
       this.isLoadingPage = false;
+      this.renderInterval()
     } catch (err) {
       this.isLoading = false;
       this.isLoadingPage = false;
       this.error = err.message;
     }
   },
+  
   validations: {
     year: {
       required,
     },
   },
   methods: {
+    async renderInterval(){
+      for(var i=0; i<7; i++){
+        await sleep(2000);
+        this.forceRender();
+        console.log("Interval")
+      }
+    },
     async get_performance_data(data) {
       for (let user in data) {
         if (this.user_id == data[user].id) {
