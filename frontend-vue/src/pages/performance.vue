@@ -225,7 +225,7 @@
         >
           <template slot="content">
             <h4 class="title">Time Taken for PO Approval Per Month (Min)</h4>
-            <p class="category">Final Approval</p>
+            <p class="category">Target: Less than {{ kpi_approval }} Min</p>
           </template>
 
           <template slot="footer">
@@ -292,7 +292,7 @@
         >
           <template slot="content">
             <h4 class="title">Time Taken for PO Pending 1 (Min)</h4>
-            <p class="category">First Approval</p>
+            <p class="category">Target: Less than {{ kpi_pending1 }} Min</p>
           </template>
 
           <template slot="footer">
@@ -336,7 +336,7 @@
         >
           <template slot="content">
             <h4 class="title">Time Taken for PO Pending 2 (Min)</h4>
-            <p class="category">Second Approval</p>
+            <p class="category">Target: Less than {{ kpi_pending2 }}</p>
           </template>
 
           <template slot="footer">
@@ -382,7 +382,7 @@
         >
           <template slot="content">
             <h4 class="title">Time Taken for PSR Approval Per Month (Min)</h4>
-            <p class="category">Final Approval</p>
+            <p class="category">Target: Less than {{ kpi_approval }} Min</p>
           </template>
 
           <template slot="footer">
@@ -449,7 +449,7 @@
         >
           <template slot="content">
             <h4 class="title">Time Taken for PSR Pending 1 (Min)</h4>
-            <p class="category">First Approval</p>
+            <p class="category">Target: Less than {{ kpi_pending1 }}</p>
           </template>
 
           <template slot="footer">
@@ -493,7 +493,7 @@
         >
           <template slot="content">
             <h4 class="title">Time taken for PSR Pending 2 (Min)</h4>
-            <p class="category">Second Approval</p>
+            <p class="category">Target: Less than {{ kpi_pending2 }}</p>
           </template>
 
           <template slot="footer">
