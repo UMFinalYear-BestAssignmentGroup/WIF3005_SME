@@ -89,14 +89,14 @@
             <h3 class="title">
               <span
                 :style="[
-                  POefficiency >= kpi_efficiency ? {} : { color: '#FF0000' },
+                  POefficiency >= kpi_po_efficiency ? {} : { color: '#FF0000' },
                 ]"
                 style="font-size: 30px"
                 >{{ POefficiency }}%</span
               >
               <span>
                 <br />
-                <small>Target: {{ kpi_efficiency }}%</small>
+                <small>Target: {{ kpi_po_efficiency }}%</small>
               </span>
             </h3>
           </template>
@@ -105,7 +105,7 @@
             <div
               class="stats"
               :style="[
-                POefficiency >= kpi_efficiency
+                POefficiency >= kpi_po_efficiency
                   ? { color: 'green' }
                   : { color: '#FF0000' },
               ]"
@@ -113,17 +113,17 @@
             >
               <md-icon
                 :style="[
-                  POefficiency >= kpi_efficiency
+                  POefficiency >= kpi_po_efficiency
                     ? { color: 'green' }
                     : { color: '#FF0000' },
                 ]"
                 >{{
-                  POefficiency >= kpi_efficiency
+                  POefficiency >= kpi_po_efficiency
                     ? "trending_up"
                     : "trending_down"
                 }}</md-icon
               >
-              {{ Math.abs(POefficiency - kpi_efficiency) }}%
+              {{ Math.abs(POefficiency - kpi_po_efficiency) }}%
             </div>
           </template>
         </stats-card>
@@ -171,14 +171,14 @@
             <h3 class="title">
               <span
                 :style="[
-                  PSRefficiency >= kpi_efficiency ? {} : { color: '#FF0000' },
+                  PSRefficiency >= kpi_psr_efficiency ? {} : { color: '#FF0000' },
                 ]"
                 style="font-size: 30px"
                 >{{ PSRefficiency }}%</span
               >
               <span>
                 <br />
-                <small>Target: {{ kpi_efficiency }}%</small>
+                <small>Target: {{ kpi_psr_efficiency }}%</small>
               </span>
             </h3>
           </template>
@@ -187,7 +187,7 @@
             <div
               class="stats"
               :style="[
-                PSRefficiency >= kpi_efficiency
+                PSRefficiency >= kpi_psr_efficiency
                   ? { color: 'green' }
                   : { color: '#FF0000' },
               ]"
@@ -195,17 +195,17 @@
             >
               <md-icon
                 :style="[
-                  PSRefficiency >= kpi_efficiency
+                  PSRefficiency >= kpi_psr_efficiency
                     ? { color: 'green' }
                     : { color: '#FF0000' },
                 ]"
                 >{{
-                  PSRefficiency >= kpi_efficiency
+                  PSRefficiency >= kpi_psr_efficiency
                     ? "trending_up"
                     : "trending_down"
                 }}</md-icon
               >
-              {{ Math.abs(PSRefficiency - kpi_efficiency) }}%
+              {{ Math.abs(PSRefficiency - kpi_psr_efficiency) }}%
             </div>
           </template>
         </stats-card>
@@ -620,7 +620,8 @@ export default {
       year: new Date().getFullYear(),
       performanceData: [],
       users: [],
-      kpi_efficiency: 82,
+      kpi_po_efficiency: 82,
+      kpi_psr_efficiency: 82,
       kpi_pending1: 900,
       kpi_pending2: 800,
       kpi_approval: 650,
@@ -932,6 +933,9 @@ export default {
       this.isLoading = true;
       this.isLoadingPage = true;
       const data = await performance.get_performance(this.year);
+      const previousYearData = await performance.get_performance(this.year-1);
+      await this.getPOEfficiencyKPI(previousYearData);
+      await this.getPSREfficiencyKPI(previousYearData);
       this.performanceData = data;
       this.getAllData(this.performanceData);
       const user = await performance.get_all_user_performance(this.year);
@@ -958,6 +962,9 @@ export default {
           this.isLoading = true;
           this.isLoadingPage = true;
           this.performanceData = await performance.get_performance(this.year);
+          const previousYearData = await performance.get_performance(this.year-1);
+          await this.getPOEfficiencyKPI(previousYearData);
+          await this.getPSREfficiencyKPI(previousYearData);
           this.getAllData(this.performanceData);
           const user = await performance.get_all_user_performance(this.year);
           console.log(user);
@@ -991,7 +998,7 @@ export default {
           data.overall[dataMonth].po_efficiency == null
             ? 0
             : parseInt(data.overall[dataMonth].po_efficiency);
-        if (parseInt(data.overall[dataMonth].psr_efficiency) != 0) {
+        if (parseInt(data.overall[dataMonth].po_efficiency) != 0) {
           monthCount += 1;
         }
       }
@@ -1231,6 +1238,34 @@ export default {
         this.avg_psr_approval = psr_approval / 12;
       }
       console.log(this.reach_kpi_po_pending1);
+    },
+    async getPOEfficiencyKPI(data) {
+      let totalEfficiency = 0;
+      let monthCount = 0;
+      for (let dataMonth in data.overall) {
+        totalEfficiency +=
+          data.overall[dataMonth].po_efficiency == null
+            ? 0
+            : parseInt(data.overall[dataMonth].po_efficiency);
+        if (parseInt(data.overall[dataMonth].po_efficiency) != 0) {
+          monthCount += 1;
+        }
+      }
+      this.kpi_po_efficiency = isNaN((totalEfficiency / monthCount).toFixed(2)) ? 82 : (totalEfficiency / monthCount).toFixed(2);
+    },
+    async getPSREfficiencyKPI(data) {
+      let totalEfficiency = 0;
+      let monthCount = 0;
+      for (let dataMonth in data.overall) {
+        totalEfficiency +=
+          data.overall[dataMonth].psr_efficiency == null
+            ? 0
+            : parseInt(data.overall[dataMonth].psr_efficiency);
+        if (parseInt(data.overall[dataMonth].psr_efficiency) != 0) {
+          monthCount += 1;
+        }
+      }
+      this.kpi_psr_efficiency = isNaN((totalEfficiency / monthCount).toFixed(2)) ? 82 : (totalEfficiency / monthCount).toFixed(2);
     },
     forceRender() {
       this.componentKey += 1;
