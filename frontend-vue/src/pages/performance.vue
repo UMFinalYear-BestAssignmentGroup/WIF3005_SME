@@ -1090,13 +1090,13 @@ export default {
       let series = Array();
       for (let dataMonth in data.overall) {
         series.push(
-          data.overall[dataMonth].tmp_average_po.decline.minutes == null
+          data.overall[dataMonth].total_po_decline == null
             ? 0
-            : parseInt(data.overall[dataMonth].tmp_average_po.decline.minutes)
+            : parseInt(data.overall[dataMonth].total_po_decline)
         );
       }
       this.POdataDeclineChart.data.series.push(series);
-      this.POdataDeclineChart.options.high = Math.max.apply(Math, series) + 50;
+      this.POdataDeclineChart.options.high = Math.max.apply(Math, series) + 2;
       this.forceRender();
     },
     async getPSRPendingOneseries(data) {
@@ -1150,13 +1150,13 @@ export default {
       let series = Array();
       for (let dataMonth in data.overall) {
         series.push(
-          data.overall[dataMonth].tmp_average_psr.decline.minutes == null
+          data.overall[dataMonth].total_psr_decline == null
             ? 0
-            : parseInt(data.overall[dataMonth].tmp_average_psr.decline.minutes)
+            : parseInt(data.overall[dataMonth].total_psr_decline)
         );
       }
       this.PSRdataDeclineChart.data.series.push(series);
-      this.PSRdataDeclineChart.options.high = Math.max.apply(Math, series) + 50;
+      this.PSRdataDeclineChart.options.high = Math.max.apply(Math, series) + 2;
       this.forceRender();
     },
     async getKPI(data) {

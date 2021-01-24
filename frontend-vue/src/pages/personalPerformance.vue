@@ -953,7 +953,7 @@ export default {
           data[dataMonth].po_efficiency == null
             ? 0
             : parseInt(data[dataMonth].po_efficiency);
-        if (data[dataMonth].po_efficiency != null) {
+        if (parseInt(data[dataMonth].po_efficiency) != 0) {
           monthCount += 1;
         }
         this.totalDeclinePO +=
@@ -983,7 +983,7 @@ export default {
           data[dataMonth].psr_efficiency == null
             ? 0
             : parseInt(data[dataMonth].psr_efficiency);
-        if (data[dataMonth].psr_efficiency != null) {
+        if (parseInt(data[dataMonth].psr_efficiency) != 0) {
           monthCount += 1;
         }
         this.totalDeclinePSR +=
