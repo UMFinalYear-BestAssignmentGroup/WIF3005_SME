@@ -129,7 +129,7 @@
       >
         <stats-card
           :data-background-color="[
-            POefficiency >= kpi_efficiency ? 'green' : 'red',
+            POefficiency >= kpi_po_efficiency ? 'green' : 'red',
           ]"
         >
           <template slot="header">
@@ -141,14 +141,14 @@
             <h3 class="title">
               <span
                 :style="[
-                  POefficiency >= kpi_efficiency ? {} : { color: '#FF0000' },
+                  POefficiency >= kpi_po_efficiency ? {} : { color: '#FF0000' },
                 ]"
                 style="font-size: 30px"
                 >{{ POefficiency }}%
               </span>
               <span>
                 <br />
-                <small>Target: {{ kpi_efficiency }}%</small>
+                <small>Target: {{ kpi_po_efficiency }}%</small>
               </span>
             </h3>
           </template>
@@ -157,7 +157,7 @@
             <div
               class="stats"
               :style="[
-                POefficiency >= kpi_efficiency
+                POefficiency >= kpi_po_efficiency
                   ? { color: 'green' }
                   : { color: '#FF0000' },
               ]"
@@ -165,17 +165,24 @@
             >
               <md-icon
                 :style="[
-                  POefficiency >= kpi_efficiency
+                  POefficiency >= kpi_po_efficiency
                     ? { color: 'green' }
                     : { color: '#FF0000' },
                 ]"
                 >{{
-                  POefficiency >= kpi_efficiency
-                    ? "trending_up"
-                    : "trending_down"
+                  POefficiency >= kpi_po_efficiency
+                    ? "check_circle_outline"
+                    : "error_outline"
                 }}</md-icon
               >
-              {{ Math.abs(POefficiency - kpi_efficiency) }}%
+              <div v-if="POefficiency >= kpi_po_efficiency">
+                Target Success: Higher
+                {{ Math.abs(POefficiency - kpi_po_efficiency) }}%
+              </div>
+              <div v-else>
+                Target Failed: Lower
+                {{ Math.abs(POefficiency - kpi_po_efficiency) }}%
+              </div>
             </div>
           </template>
         </stats-card>
@@ -259,14 +266,16 @@
             <h3 class="title">
               <span
                 :style="[
-                  PSRefficiency >= kpi_efficiency ? {} : { color: '#FF0000' },
+                  PSRefficiency >= kpi_psr_efficiency
+                    ? {}
+                    : { color: '#FF0000' },
                 ]"
                 style="font-size: 30px"
                 >{{ PSRefficiency }}%</span
               >
               <span>
                 <br />
-                <small>Target: {{ kpi_efficiency }}%</small>
+                <small>Target: {{ kpi_psr_efficiency }}%</small>
               </span>
             </h3>
           </template>
@@ -275,7 +284,7 @@
             <div
               class="stats"
               :style="[
-                PSRefficiency >= kpi_efficiency
+                PSRefficiency >= kpi_psr_efficiency
                   ? { color: 'green' }
                   : { color: '#FF0000' },
               ]"
@@ -283,17 +292,24 @@
             >
               <md-icon
                 :style="[
-                  PSRefficiency >= kpi_efficiency
+                  PSRefficiency >= kpi_psr_efficiency
                     ? { color: 'green' }
                     : { color: '#FF0000' },
                 ]"
                 >{{
-                  PSRefficiency >= kpi_efficiency
-                    ? "trending_up"
-                    : "trending_down"
+                  POefficiency >= kpi_po_efficiency
+                    ? "check_circle_outline"
+                    : "error_outline"
                 }}</md-icon
               >
-              {{ Math.abs(PSRefficiency - kpi_efficiency) }}%
+              <div v-if="POefficiency >= kpi_po_efficiency">
+                Target Success: Higher
+                {{ Math.abs(POefficiency - kpi_po_efficiency) }}%
+              </div>
+              <div v-else>
+                Target Failed: Lower
+                {{ Math.abs(POefficiency - kpi_po_efficiency) }}%
+              </div>
             </div>
           </template>
         </stats-card>
@@ -335,11 +351,18 @@
                   ]"
                   >{{
                     avg_po_approval > kpi_approval
-                      ? "trending_down"
-                      : "trending_up"
+                      ? "error_outline"
+                      : "check_circle_outline"
                   }}</md-icon
                 >
-                {{ Math.abs(avg_po_approval - kpi_approval) }} min
+                <div v-if="avg_po_approval > kpi_approval">
+                  Target Failed: Higher
+                  {{ Math.abs(avg_po_approval - kpi_approval).toFixed(2) }} min
+                </div>
+                <div v-else>
+                  Target Success: Lower
+                  {{ Math.abs(avg_po_approval - kpi_approval).toFixed(2) }} min
+                </div>
               </div>
             </template>
           </chart-card>
@@ -382,11 +405,18 @@
                   ]"
                   >{{
                     avg_po_pending1 > kpi_pending1
-                      ? "trending_down"
-                      : "trending_up"
+                      ? "error_outline"
+                      : "check_circle_outline"
                   }}</md-icon
                 >
-                {{ Math.abs(avg_po_pending1 - kpi_pending1) }} min
+                <div v-if="avg_po_pending1 > kpi_pending1">
+                  Target Failed: Higher
+                  {{ Math.abs(avg_po_pending1 - kpi_pending1).toFixed(2) }} min
+                </div>
+                <div v-else>
+                  Target Success: Lower
+                  {{ Math.abs(avg_po_pending1 - kpi_pending1).toFixed(2) }} min
+                </div>
               </div>
             </template>
           </chart-card>
@@ -428,11 +458,18 @@
                   ]"
                   >{{
                     avg_po_pending2 > kpi_pending2
-                      ? "trending_down"
-                      : "trending_up"
+                      ? "error_outline"
+                      : "check_circle_outline"
                   }}</md-icon
                 >
-                {{ Math.abs(avg_po_pending2 - kpi_pending2) }} min
+                <div v-if="avg_po_pending2 > kpi_pending2">
+                  Target Failed: Higher
+                  {{ Math.abs(avg_po_pending2 - kpi_pending2).toFixed(2) }} min
+                </div>
+                <div v-else>
+                  Target Success: Lower
+                  {{ Math.abs(avg_po_pending2 - kpi_pending2).toFixed(2) }} min
+                </div>
               </div>
             </template>
           </chart-card>
@@ -475,11 +512,18 @@
                   ]"
                   >{{
                     avg_psr_approval > kpi_approval
-                      ? "trending_down"
-                      : "trending_up"
+                      ? "error_outline"
+                      : "check_circle_outline"
                   }}</md-icon
                 >
-                {{ Math.abs(avg_psr_approval - kpi_approval) }} min
+                <div v-if="avg_psr_approval > kpi_approval">
+                  Target Failed: Higher
+                  {{ Math.abs(avg_psr_approval - kpi_approval).toFixed(2) }} min
+                </div>
+                <div v-else>
+                  Target Success: Lower
+                  {{ Math.abs(avg_psr_approval - kpi_approval).toFixed(2) }} min
+                </div>
               </div>
             </template>
           </chart-card>
@@ -522,11 +566,18 @@
                   ]"
                   >{{
                     avg_psr_pending1 > kpi_pending1
-                      ? "trending_down"
-                      : "trending_up"
+                      ? "error_outline"
+                      : "check_circle_outline"
                   }}</md-icon
                 >
-                {{ Math.abs(avg_psr_pending1 - kpi_pending1) }} min
+                <div v-if="avg_psr_pending1 > kpi_pending1">
+                  Target Failed: Higher
+                  {{ Math.abs(avg_psr_pending1 - kpi_pending1).toFixed(2) }} min
+                </div>
+                <div v-else>
+                  Target Success: Lower
+                  {{ Math.abs(avg_psr_pending1 - kpi_pending1).toFixed(2) }} min
+                </div>
               </div>
             </template>
           </chart-card>
@@ -568,11 +619,18 @@
                   ]"
                   >{{
                     avg_psr_pending2 > kpi_pending2
-                      ? "trending_down"
-                      : "trending_up"
+                      ? "error_outline"
+                      : "check_circle_outline"
                   }}</md-icon
                 >
-                {{ Math.abs(avg_psr_pending2 - kpi_pending2) }} min
+                <div v-if="avg_psr_pending2 > kpi_pending2">
+                  Target Failed: Higher
+                  {{ Math.abs(avg_psr_pending2 - kpi_pending2).toFixed(2) }} min
+                </div>
+                <div v-else>
+                  Target Success: Lower
+                  {{ Math.abs(avg_psr_pending2 - kpi_pending2).toFixed(2) }} min
+                </div>
               </div>
             </template>
           </chart-card>
@@ -617,7 +675,8 @@ export default {
       componentKey: 0,
       error: "",
       isPosted: false,
-      kpi_efficiency: 82,
+      kpi_po_efficiency: 82,
+      kpi_psr_efficiency: 82,
       kpi_pending1: 900,
       kpi_pending2: 800,
       kpi_approval: 650,
@@ -855,30 +914,35 @@ export default {
       this.isLoadingPage = true;
       this.user_id = this.id;
       const data = await performance.get_all_user_performance(this.year);
+      const previousYearData = await performance.get_all_user_performance(
+        this.year - 1
+      );
+      await this.getPOEfficiencyKPI(previousYearData);
+      await this.getPSREfficiencyKPI(previousYearData);
       this.usersData = data.user_data;
       await this.get_performance_data(this.usersData);
       this.getAllData(this.performanceData);
       this.isLoading = false;
       this.isLoadingPage = false;
-      this.renderInterval()
+      this.renderInterval();
     } catch (err) {
       this.isLoading = false;
       this.isLoadingPage = false;
       this.error = err.message;
     }
   },
-  
+
   validations: {
     year: {
       required,
     },
   },
   methods: {
-    async renderInterval(){
-      for(var i=0; i<7; i++){
+    async renderInterval() {
+      for (var i = 0; i < 7; i++) {
         await sleep(2000);
         this.forceRender();
-        console.log("Interval")
+        console.log("Interval");
       }
     },
     async get_performance_data(data) {
@@ -919,6 +983,11 @@ export default {
           this.isLoading = true;
           this.isLoadingPage = true;
           const data = await performance.get_all_user_performance(this.year);
+          const previousYearData = await performance.get_all_user_performance(
+            this.year - 1
+          );
+          await this.getPOEfficiencyKPI(previousYearData);
+          await this.getPSREfficiencyKPI(previousYearData);
           this.usersData = data.user_data;
           await this.get_performance_data(this.usersData);
           this.getAllData(this.performanceData);
@@ -1143,7 +1212,41 @@ export default {
         this.avg_psr_approval = psr_approval / 12;
       }
     },
-
+    async getPOEfficiencyKPI(data) {
+      let totalEfficiency = 0;
+      let monthCount = 0;
+      for (let dataMonth in data) {
+        totalEfficiency +=
+          data[dataMonth].po_efficiency == null
+            ? 0
+            : parseInt(data[dataMonth].po_efficiency);
+        if (parseInt(data[dataMonth].po_efficiency) != 0) {
+          monthCount += 1;
+        }
+      }
+      console.log((totalEfficiency / monthCount).toFixed(2));
+      this.kpi_po_efficiency =
+        (totalEfficiency / monthCount).toFixed(2) == 0.0
+          ? 82
+          : (totalEfficiency / monthCount).toFixed(2);
+    },
+    async getPSREfficiencyKPI(data) {
+      let totalEfficiency = 0;
+      let monthCount = 0;
+      for (let dataMonth in data) {
+        totalEfficiency +=
+          data[dataMonth].psr_efficiency == null
+            ? 0
+            : parseInt(data[dataMonth].psr_efficiency);
+        if (parseInt(data[dataMonth].psr_efficiency) != 0) {
+          monthCount += 1;
+        }
+      }
+      this.kpi_psr_efficiency =
+        (totalEfficiency / monthCount).toFixed(2) == 0.0
+          ? 82
+          : (totalEfficiency / monthCount).toFixed(2);
+    },
     forceRender() {
       this.componentKey += 1;
     },
