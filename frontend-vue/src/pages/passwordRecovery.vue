@@ -80,8 +80,6 @@ export default {
       error: "",
       isLoading: false,
       id: localStorage.id,
-      isEmpty: false,
-      dataBackgroundColor: "blue",
       isPosted: false,
     };
   },

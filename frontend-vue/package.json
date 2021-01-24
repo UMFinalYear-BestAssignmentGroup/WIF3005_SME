@@ -13,7 +13,8 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
     "@fortawesome/free-solid-svg-icons": "^5.14.0",
     "@fortawesome/vue-fontawesome": "^0.1.10",
-    "axios": "^0.19.2",
+    "await-sleep": "0.0.1",
+    "axios": "^0.21.1",
     "buefy": "^0.8.20",
     "chartist": "0.11.2",
     "dateformat": "^3.0.3",
@@ -37,7 +38,7 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "3.8.0",
     "@vue/cli-plugin-eslint": "3.8.0",
-    "@vue/cli-service": "3.8.3",
+    "@vue/cli-service": "^4.5.11",
     "@vue/eslint-config-prettier": "4.0.1",
     "es6-promise": "4.2.8",
     "eslint-plugin-vue": "5.2.2",

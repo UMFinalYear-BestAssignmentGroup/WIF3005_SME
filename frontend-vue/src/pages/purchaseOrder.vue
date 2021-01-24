@@ -266,9 +266,9 @@
 
 <script>
 import purchaseOrder from "@/js/po.js"; //directory to po.js
-import { SimpleTable,  notifyPO, notifyPSR, psrSearch } from "@/components"; //notifyLeave,
+// import { SimpleTable,  notifyPO, notifyPSR, psrSearch } from "@/components"; //notifyLeave,
 import poClass from "@/js/class/po_class.js"; //directory to po_class.js
-import { required, minLength, sameAs, minValue } from "vuelidate/lib/validators";
+import { required } from "vuelidate/lib/validators";
 export default {
   data() {
     return {

@@ -33,7 +33,7 @@
                                     <md-highlight-text :md-term="term">{{ item }}</md-highlight-text>
                                   </template>
 
-                                  <template slot="md-autocomplete-empty" slot-scope="{ term }">
+                                  <template slot="md-autocomplete-empty">
                                     No PSR Number matching found
                                   </template>
                                 </md-autocomplete>
@@ -77,7 +77,7 @@
                                       <md-highlight-text :md-term="term">{{ item }}</md-highlight-text>
                                     </template>
 
-                                    <template slot="md-autocomplete-empty" slot-scope="{ term }">
+                                    <template slot="md-autocomplete-empty">
                                       No PSR Number matching found
                                     </template>
                                   </md-autocomplete>

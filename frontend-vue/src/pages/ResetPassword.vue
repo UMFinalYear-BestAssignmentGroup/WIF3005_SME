@@ -170,7 +170,7 @@ export default {
                 for (var i = 0; i < scripts.length; i++) {
                 for (var j = 0; j < torefreshs; j++) {
                     if (scripts[i].src && scripts[i].src.indexOf(torefreshs[j]) > -1) {
-                    new_src = scripts[i].src.replace(
+                     var new_src = scripts[i].src.replace(
                         torefreshs[j],
                         torefreshs[j] + "k=" + key
                     );

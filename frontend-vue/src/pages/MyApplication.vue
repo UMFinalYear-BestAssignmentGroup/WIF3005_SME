@@ -32,7 +32,7 @@
 
 <script>
 import user from "@/js/user.js"; //directory to user.js
-import { myLeave, myPO, myPSR } from "@/components";
+import { myPO, myPSR } from "@/components";
 
 export default {
   data() {
@@ -53,7 +53,7 @@ export default {
     }
   },
   components: {
-    myLeave,
+    // myLeave,
     myPO,
     myPSR
   }

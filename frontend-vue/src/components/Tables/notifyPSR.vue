@@ -120,7 +120,7 @@ export default {
       } else if (this.t2 == "true" || this.t3 == "true") {
         try {
           const data = await psr.get_submits(this.psrObj);
-          const limit = 8;
+          // const limit = 8;
 
           const psrs1 = data.result[0];
           this.total_page = data.result[1];
@@ -133,7 +133,7 @@ export default {
       } else if (this.t4 == "true") {
         try {
           const data = await psr.get_pending(this.psrObj);
-          const limit = 8;
+          // const limit = 8;
 
           const psrs1 = data.result[0];
           this.total_page = data.result[1];

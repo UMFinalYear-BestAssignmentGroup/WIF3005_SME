@@ -1,31 +1,31 @@
 export default class psrClass {
     constructor() {
-        var id = null;
-        var psr_no = null;
-        var purchase_class = null;
-        var purchase_typ = null;
-        var purchase_just = null;
-        var cost_typ = null;
-        var date_req = null;
-        var project_title = null;
-        var vessel_code = null;
-        var delv = null;
-        var psr_desc = null;
-        var department = null;
-        var branch = null;
-        var decline_reason = null;
-        var total_page = 0;
-        var in_page = 0;
-        var in_param_1 = null;
-        var in_param_2 = null;
-        var in_param_3 = null;
-        var in_param_4 = null;
-        var in_param_5 = null;
-        var in_param_6 = null;
-        var in_param_7 = null;
-        var in_param_8 = null;
-        var in_param_9 = null;
-        var in_param_10 = null;
+        // var id = null;
+        // var psr_no = null;
+        // var purchase_class = null;
+        // var purchase_typ = null;
+        // var purchase_just = null;
+        // var cost_typ = null;
+        // var date_req = null;
+        // var project_title = null;
+        // var vessel_code = null;
+        // var delv = null;
+        // var psr_desc = null;
+        // var department = null;
+        // var branch = null;
+        // var decline_reason = null;
+        // var total_page = 0;
+        // var in_page = 0;
+        // var in_param_1 = null;
+        // var in_param_2 = null;
+        // var in_param_3 = null;
+        // var in_param_4 = null;
+        // var in_param_5 = null;
+        // var in_param_6 = null;
+        // var in_param_7 = null;
+        // var in_param_8 = null;
+        // var in_param_9 = null;
+        // var in_param_10 = null;
     }
     get id() {
         return this._id;
@@ -219,7 +219,7 @@ export default class psrClass {
     //set next page
     nextPage() {
         this.in_page = this.in_page + 1;
-        if(this.in_page > this.total_page) {
+        if (this.in_page > this.total_page) {
             this.in_page = this.total_page;
         }
         return this.in_page;
@@ -228,7 +228,7 @@ export default class psrClass {
     //set prev page
     prevPage() {
         this.in_page = this.in_page - 1;
-        if(this.in_page <= 0) {
+        if (this.in_page <= 0) {
             this.in_page = 1;
         }
         return this.in_page;

@@ -1,5 +1,5 @@
 <template>
-  <!-- <ul class="nav nav-mobile-menu">
+  <ul class="nav nav-mobile-menu">
     <li>
       <md-field>
         <label>Search</label>
@@ -34,7 +34,7 @@
         <p>Profile</p></a
       >
     </li>
-  </ul> -->
+  </ul>
 </template>
 <script>
 export default {

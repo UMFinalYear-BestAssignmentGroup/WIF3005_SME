@@ -50,7 +50,7 @@ import user from "@/js/user.js"; //directory to user.js
 
 export default {
   data() {
-    imageURL: "@/assets/img/sidebar-2.jpg";
+    // imageURL: "@/assets/img/sidebar-2.jpg";
     return {
       // nama: null,
       isShow: false,

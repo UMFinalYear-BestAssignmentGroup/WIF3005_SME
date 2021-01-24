@@ -32,7 +32,7 @@
 
 <script>
 import user from "@/js/user.js"; //directory to user.js
-import { SimpleTable,  notifyPO, notifyPSR } from "@/components"; //notifyLeave,
+import { notifyPO, notifyPSR } from "@/components"; //notifyLeave,
 
 export default {
   data() {
@@ -53,7 +53,7 @@ export default {
     }
   },
   components: {
-    SimpleTable,
+    // SimpleTable,
     // notifyLeave,
     notifyPO,
     notifyPSR

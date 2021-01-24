@@ -123,7 +123,7 @@ export default {
         this.isLoading = true;
         const data = await psr.show_own_psr_page(this.psrObj);
         console.log(data);
-        const limit = 8;
+        // const limit = 8;
 
         const psrs1 = data.result[0];
         this.total_page = data.result[1];

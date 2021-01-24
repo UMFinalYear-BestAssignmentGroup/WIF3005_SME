@@ -230,7 +230,6 @@ export default {
       date:null,
       month: null,
       year: null,
-      isEmpty: false,
       isLoading: false,
       fullDate: null
     };

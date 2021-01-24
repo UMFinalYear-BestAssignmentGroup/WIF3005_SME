@@ -8,7 +8,7 @@ module.exports = {
         // target: "http://localhost:3333"
         // target: "http://192.168.193.236:3000"
         // target: "http://192.168.193.195"
-        target: "https://dinasti-jati.herokuapp.com/"   //use the herokuapp as database to run the backend
+        target: "https://wif3005-sme.herokuapp.com/"   //use the herokuapp as database to run the backend
         // target: "http://192.168.193.236:3333"
         // target: "http://localhost:3000"
       }

@@ -417,7 +417,7 @@
 import po from "@/js/po.js"; //directory to po.js
 import generatePO from "@/js/generatePO.js"; //directory to po.js
 import poClass from "@/js/class/po_class.js"; //directory to po_class.js
-import jsPDF from 'jspdf';
+// import jsPDF from 'jspdf';
 
 export default {
   name: "display-PO",

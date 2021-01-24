@@ -31,185 +31,206 @@ import user from "@/pages/User.vue";
 import poListing from "@/pages/POListing.vue";
 import psrListing from "@/pages/PSRListing.vue";
 import passwordRecovery from "@/pages/passwordRecovery.vue";
+import performance from "@/pages/performance.vue";
+import userPerformance from "@/pages/userPerformance.vue";
+import personalPerformance from "@/pages/personalPerformance.vue";
+import performanceDashboard from "@/pages/performanceDashboard.vue";
 
-
-const routes = [
-  {
-    path: "/",
-    name: "Login Page",
-    component: login,
-    redirect: "/login"
-  },
-  {
-    path: "/login",
-    name: "Login Page",
-    component: login
-  },
-  {
-    path: "/dashboard/:id",
-    component: DashboardLayout,
-    // redirect: "/dashboard",
-    children: [
-      {
-        path: "/enterPSR/:id",
-        name: "Enter PSR",
-        component: enterPSR
-      },
-      {
-        path: "/resetPassword/:id",
-        name: "Reset Password",
-        component: resetPassword
-      },
-      {
-        path: "/poListing/:id",
-        name: "Purchase Order Listing",
-        component: poListing
-      },
-      {
-        path: "/psrListing/:id",
-        name: "PSR Listing",
-        component: psrListing
-      },
-      {
-        path: "/myApplication/:id",
-        name: "My Applications",
-        component: myApplication
-      },
-      {
-        path: "/user/:id",
-        name: "User",
-        component: user
-      },
-      {
-        path: "/table/",
-        name: "Table Template",
-        component: template
-      },
-      {
-        path: "/register/:id",
-        name: "Staff Registration",
-        component: register
-      },
-      {
-        path: "/message/:id",
-        name: "Message",
-        component: message
-      },
-      {
-        path: "/passwordRecovery/:id/:user_id",
-        name: "Password Recovery",
-        component: passwordRecovery
-      },
-      {
-        path: "/displayPO/:id/:po_no/:action",
-        name: "Display Purchase Order",
-        component: displayPO
-      },
-      {
-        path: "/displayPSR/:id/:psr_id/:action",
-        name: "Display PSR",
-        component: displayPSR
-      },
-      // {
-      //   path: "/displayLeave/:id/:leave_id/:action",
-      //   name: "Display Leave",
-      //   component: displayLeave
-      // },
-      {
-        path: "/editPO/:id",
-        name: "Edit PO",
-        component: editPO
-      },
-      // {
-      //   path: "/leaveSubmitSuccess/:id",
-      //   name: "Leave Application Successful",
-      //   component: leaveSubmitSuccess
-      // },
-      {
-        path: "/POSubmitSuccess/:id",
-        name: "Purchase Order Application Successful",
-        component: POSubmitSuccess
-      },
-      {
-        path: "/notification/:id",
-        name: "Notification",
-        component: notifications
-      },
-      {
-        path: "/PSR/:id",
-        name: "PSR",
-        component: PSR
-      },
-      // {
-      //   path: "/leaveApplication/:id",
-      //   name: "Leave Application",
-      //   component: leaveApplication
-      // },
-      {
-        path: "/purchaseOrder/:id/:psr_id",
-        name: "Purchase Order",
-        component: purchaseOrder
-      },
-      {
-        path: "/dynamicForm/:id",
-        name: "Dynamic Form",
-        component: dynamicForm
-      },
-      {
-        path: "/stepForm/:id",
-        name: "2 Step Form",
-        component: stepForm
-      },
-      {
+const routes = [{
+        path: "/",
+        name: "Login Page",
+        component: login,
+        redirect: "/login"
+    },
+    {
+        path: "/login",
+        name: "Login Page",
+        component: login
+    },
+    {
         path: "/dashboard/:id",
-        name: "Dashboard",
-        component: Dashboard
-      },
-      {
-        path: "/userProfile/:id/:user_id",
-        name: "User Profile",
-        component: UserProfile
-      },
-      {
-        path: "/table/:id",
-        name: "Table List",
-        component: TableList
-      },
-      {
-        path: "/typography/:id",
-        name: "Typography",
-        component: Typography
-      },
-      {
-        path: "/icons/:id",
-        name: "Icons",
-        component: Icons
-      },
-      {
-        path: "/maps/:id",
-        name: "Maps",
-        meta: {
-          hideFooter: true
-        },
-        component: Maps
-      },
-      {
-        path: "/notifications/:id",
-        name: "Notifications",
-        component: Notifications
-      },
-      {
-        path: "upgrade/:id",
-        name: "Upgrade to PRO",
-        component: UpgradeToPRO
-      }
-    ]
-  }
-  // {
-  //   path:"/",
-  //   component: loginLayout,
-  //   redirect:"/login",
-  // },
+        component: DashboardLayout,
+        // redirect: "/dashboard",
+        children: [{
+                path: "/enterPSR/:id",
+                name: "Enter PSR",
+                component: enterPSR
+            },
+            {
+                path: "/overallPerformance/:id",
+                name: "Overall Performance",
+                component: performance
+            },
+            {
+                path: "/userPerformance/:id/:user_id",
+                name: "User Performance",
+                component: userPerformance
+            },
+            {
+                path: "/personalPerformance/:id",
+                name: "Personal Performance",
+                component: personalPerformance
+            },
+            {
+                path: "/performanceDashboard/:id",
+                name: "Performance Dashboard",
+                component: performanceDashboard
+            },
+            {
+                path: "/resetPassword/:id",
+                name: "Reset Password",
+                component: resetPassword
+            },
+            {
+                path: "/poListing/:id",
+                name: "Purchase Order Listing",
+                component: poListing
+            },
+            {
+                path: "/psrListing/:id",
+                name: "PSR Listing",
+                component: psrListing
+            },
+            {
+                path: "/myApplication/:id",
+                name: "My Applications",
+                component: myApplication
+            },
+            {
+                path: "/user/:id",
+                name: "User",
+                component: user
+            },
+            {
+                path: "/table/",
+                name: "Table Template",
+                component: template
+            },
+            {
+                path: "/register/:id",
+                name: "Staff Registration",
+                component: register
+            },
+            {
+                path: "/message/:id",
+                name: "Message",
+                component: message
+            },
+            {
+                path: "/passwordRecovery/:id/:user_id",
+                name: "Password Recovery",
+                component: passwordRecovery
+            },
+            {
+                path: "/displayPO/:id/:po_no/:action",
+                name: "Display Purchase Order",
+                component: displayPO
+            },
+            {
+                path: "/displayPSR/:id/:psr_id/:action",
+                name: "Display PSR",
+                component: displayPSR
+            },
+            // {
+            //   path: "/displayLeave/:id/:leave_id/:action",
+            //   name: "Display Leave",
+            //   component: displayLeave
+            // },
+            {
+                path: "/editPO/:id",
+                name: "Edit PO",
+                component: editPO
+            },
+            // {
+            //   path: "/leaveSubmitSuccess/:id",
+            //   name: "Leave Application Successful",
+            //   component: leaveSubmitSuccess
+            // },
+            {
+                path: "/POSubmitSuccess/:id",
+                name: "Purchase Order Application Successful",
+                component: POSubmitSuccess
+            },
+            {
+                path: "/notification/:id",
+                name: "Notification",
+                component: notifications
+            },
+            {
+                path: "/PSR/:id",
+                name: "PSR",
+                component: PSR
+            },
+            // {
+            //   path: "/leaveApplication/:id",
+            //   name: "Leave Application",
+            //   component: leaveApplication
+            // },
+            {
+                path: "/purchaseOrder/:id/:psr_id",
+                name: "Purchase Order",
+                component: purchaseOrder
+            },
+            {
+                path: "/dynamicForm/:id",
+                name: "Dynamic Form",
+                component: dynamicForm
+            },
+            {
+                path: "/stepForm/:id",
+                name: "2 Step Form",
+                component: stepForm
+            },
+            {
+                path: "/dashboard/:id",
+                name: "Dashboard",
+                component: Dashboard
+            },
+            {
+                path: "/userProfile/:id/:user_id",
+                name: "User Profile",
+                component: UserProfile
+            },
+            {
+                path: "/table/:id",
+                name: "Table List",
+                component: TableList
+            },
+            {
+                path: "/typography/:id",
+                name: "Typography",
+                component: Typography
+            },
+            {
+                path: "/icons/:id",
+                name: "Icons",
+                component: Icons
+            },
+            {
+                path: "/maps/:id",
+                name: "Maps",
+                meta: {
+                    hideFooter: true
+                },
+                component: Maps
+            },
+            {
+                path: "/notifications/:id",
+                name: "Notifications",
+                component: Notifications
+            },
+            {
+                path: "upgrade/:id",
+                name: "Upgrade to PRO",
+                component: UpgradeToPRO
+            }
+        ]
+    }
+    // {
+    //   path:"/",
+    //   component: loginLayout,
+    //   redirect:"/login",
+    // },
 ];
 
 export default routes;
