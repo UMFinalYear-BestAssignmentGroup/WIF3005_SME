@@ -37,9 +37,9 @@
           >Submit</md-button
         >
 
-        {{ password }}
+        <!-- {{ password }}
         {{ name }}
-        {{ error }}
+        {{ error }} -->
       </form>
     </md-card>
   </div>

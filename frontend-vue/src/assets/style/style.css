@@ -49,17 +49,15 @@ td.clsLabelDetails{
     padding-left: 1em;
     font-weight: 700;
     text-align: left;
-    border-style: solid;
-    border-color: rgb(191, 240, 252);
+    background-color: #f3f3f3;
 }
 td.clsValueDetails{
     color: black;
     height: 20px;
     vertical-align: middle;
-    padding-left: 5%;
+    padding-left: 1em;
     font-weight: 400;
-    border-style: solid;
-    border-color:rgb(191, 240, 252);
+    border-bottom: 1px solid #dddddd;
 }
 .clsFormDetails{
     border-radius: 30px;
@@ -69,5 +67,10 @@ td.clsValueDetails{
 }
 
 .error{
+    color: red;
+}
+
+#required h4:after { 
+    content:"*"; 
     color: red;
 }

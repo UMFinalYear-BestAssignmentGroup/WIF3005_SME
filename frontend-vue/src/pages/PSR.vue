@@ -15,7 +15,7 @@
                 class="alert alert-info"
                 style="border:1px; background-color:white; color:black;"
               >
-                <section>
+                <section id="required">
                   <p><strong>Purchase Classifiaction: </strong></p>
                   <md-radio v-model="pur_class" value="OPEX" class="md-primary"
                     >OPEX</md-radio
@@ -29,7 +29,7 @@
                 class="alert alert-info"
                 style="border:1px; background-color:white; color:black;"
               >
-                <section>
+                <section id="required">
                   <div class="inline" style="border:1px">
                     <p><strong>Purchase Type: </strong></p>
                     <md-radio
@@ -69,7 +69,7 @@
                 class="alert alert-info"
                 style="border:1px; background-color:white; color:black;"
               >
-                <section>
+                <section id="required">
                   <p><strong>Justification of Purchase: </strong></p>
                   <md-radio
                     v-model="pur_just"
@@ -119,7 +119,7 @@
                   class="alert alert-info"
                   style="background-color:white;width:49%; height:120px; display: inline-block; float:right"
                 >
-                  <section>
+                  <section id="required">
                     <p><strong>Delivery: </strong></p>
                     <b-field>
                       <b-select v-model="delv" expanded style="width:98%;">
@@ -137,7 +137,7 @@
                   class="alert alert-info"
                   style="color: black; background-color:white;width:49%; display: inline-block; float:left"
                 >
-                  <section>
+                  <section id="required">
                     <p><strong>Cost Type: </strong></p>
                     <md-radio
                       v-model="costType"
@@ -186,6 +186,7 @@
                   </section>
                 </div>
               </div>
+              <h4 class="content" style="font-weight: normal;"><span style="color:red;margin-left:2%;">*</span> indicate required field</h4>
 
               <div
                 class="md-layout"
@@ -218,14 +219,14 @@
             <!-- <h1>Step Two</h1> -->
             <md-card-content>
               <div class="alert alert-info" style="background-color:white;">
-                <section>
-                  <b-field label="Project Title:">
+                <section >
+                  <b-field label="Project Title:" id="required">
                     <b-input v-model="p_title"></b-input>
                   </b-field>
                 </section>
                 <!-- </div>
                 <div class="alert alert-info" style="background-color:white;"> -->
-                <section>
+                <section id="required">
                   <b-field label="Vessel Code">
                     <b-input v-model="vessel_cd"></b-input>
                   </b-field>
@@ -544,5 +545,13 @@ table {
 }
 #body {
   background-color: #120136;
+}
+#required p:after {
+  content: "*";
+  color: red;
+}
+.label:after {
+  content: "*";
+  color: red;
 }
 </style>

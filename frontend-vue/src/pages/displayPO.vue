@@ -17,7 +17,7 @@
               v-if="pos.status_decline == false && pos.status_t2 == false"
               @click="showDialog = true"
               class="alert alert-warning"
-              style="border-radius:30px;"
+              style="border-radius:30px;cursor: pointer;"
             >
               <h4>
                 <center><strong> Status: Pending </strong></center>
@@ -26,14 +26,14 @@
             <div
               v-else-if="pos.status_decline == true"
               class="alert alert-danger"
-              style="border-radius:30px;"
+              style="border-radius:30px;cursor: pointer;"
               @click="showDialog = true"
             >
               <h4>
                 <center><strong> Status: Declined </strong></center>
               </h4>
             </div>
-            <div v-else class="alert alert-success" style="border-radius:30px;" @click="showDialog = true">
+            <div v-else class="alert alert-success" style="border-radius:30px;cursor: pointer;" @click="showDialog = true">
               <h4>
                 <center><strong> Status: Approved </strong></center>
               </h4>
@@ -243,8 +243,28 @@
             </md-card-actions>
           </div>
           
+          <!--{{Dialog for decline reason}} -->
+        <md-dialog :md-active.sync="isComponentModalActive" style="width:30%; overflow:auto;">
+          <md-dialog-title>
+            Confirm to decline?
+          </md-dialog-title>
+          <md-content style="margin-left:5%">
+              <md-textarea v-model="reason" style="width:93%;" placeholder="State the decline reason"></md-textarea>
+              <div class="error" v-if="reason==null && isPosted">Reason is required</div>
+          </md-content>
+          <md-dialog-actions>
+            <md-button class="md-success" @click="isPosted=true; decline_po()">Submit</md-button>
+            <md-button class="md-danger" @click="isComponentModalActive = false; reason=null">Close</md-button>
+          </md-dialog-actions>
+        </md-dialog>
+
           <md-dialog :md-active.sync="showDialog" style="width:100%; overflow:auto;">
-            <md-dialog-title>Purchase Order Details</md-dialog-title>
+            <md-dialog-title>
+              Purchase Order Details
+              <span class="tag is-warning" v-if="pos.status_decline == false && pos.status_t2 == false">Pending</span>
+              <span class="tag is-danger" v-else-if="pos.status_decline == true">Declined</span>
+              <span class="tag is-success" v-else>Approved</span>
+            </md-dialog-title>
             <md-content>
               <table cls="clsFormDetails" width="95%:" style="margin-left: 3%;">
                     <col width="25%">
@@ -281,19 +301,20 @@
                         <td class="clsLabelDetails" colspan="2">
                             <h4>Name </h4>
                         </td>
-                        <td class="clsValueDetails" colspan="2">
-                            <h4>{{pos.t2_user_po.firstname}}{{pos.t2_user_po.lastname}}</h4>
-                        </td>
-                    </tr>
-                    <tr v-if="pos.t2_user_po">
                         <td class="clsLabelDetails">
                             <h4>Status </h4>
                         </td>
-                        <td class="clsValueDetails">
-                            <h4>{{pos.status_t1_1}}</h4>
-                        </td>
                         <td class="clsLabelDetails">
                             <h4>Date Approved </h4>
+                        </td>
+                    </tr>
+                    <tr v-if="pos.t2_user_po">
+                        <td class="clsValueDetails" colspan="2">
+                            <h4>{{pos.t2_user_po.firstname}}{{pos.t2_user_po.lastname}}</h4>
+                        </td>
+                        <td class="clsValueDetails">
+                            <h4 v-if="pos.status_t1_1">Approved</h4>
+                            <h4 v-else>Declined</h4>
                         </td>
                         <td class="clsValueDetails">
                             <h4>{{pos.date_pending_1 | moment("Do MMMM YYYY")}}</h4>
@@ -309,19 +330,20 @@
                         <td class="clsLabelDetails" colspan="2">
                             <h4>Name </h4>
                         </td>
-                        <td class="clsValueDetails" colspan="2">
-                            <h4>{{pos.t3_user_po.firstname}}{{pos.t3_user_po.lastname}}</h4>
-                        </td>
-                    </tr>
-                    <tr v-if="pos.t3_user_po">
                         <td class="clsLabelDetails">
                             <h4>Status </h4>
                         </td>
-                        <td class="clsValueDetails">
-                            <h4>{{pos.status_t1_2}}</h4>
-                        </td>
                         <td class="clsLabelDetails">
                             <h4>Date Approved </h4>
+                        </td>
+                    </tr>
+                    <tr v-if="pos.t3_user_po">
+                        <td class="clsValueDetails" colspan="2">
+                            <h4>{{pos.t3_user_po.firstname}}{{pos.t3_user_po.lastname}}</h4>
+                        </td>
+                        <td class="clsValueDetails">
+                            <h4 v-if="pos.status_t1_2">Approved</h4>
+                            <h4 v-else>Declined</h4>
                         </td>
                         <td class="clsValueDetails">
                             <h4>{{pos.date_pending_2 | moment("Do MMMM YYYY")}}</h4>
@@ -337,22 +359,45 @@
                         <td class="clsLabelDetails" colspan="2">
                             <h4>Name </h4>
                         </td>
-                        <td class="clsValueDetails" colspan="2">
-                            <h4>{{pos.approver_po.firstname}}{{pos.approver_po.lastname}}</h4>
-                        </td>
-                    </tr>
-                    <tr v-if="pos.approver_po">
                         <td class="clsLabelDetails">
                             <h4>Status </h4>
-                        </td>
-                        <td class="clsValueDetails">
-                            <h4>{{pos.status_t2 }}</h4>
                         </td>
                         <td class="clsLabelDetails">
                             <h4>Date Approved </h4>
                         </td>
+                    </tr>
+                    <tr v-if="pos.approver_po">
+                        <td class="clsValueDetails" colspan="2">
+                            <h4>{{pos.approver_po.firstname}}{{pos.approver_po.lastname}}</h4>
+                        </td>
+                        <td class="clsValueDetails">
+                            <h4 v-if="pos.status_t2">Approved</h4>
+                            <h4 v-else>Declined</h4>
+                        </td>
                         <td class="clsValueDetails">
                             <h4>{{pos.date_approve | moment("Do MMMM YYYY")}}</h4>
+                        </td>
+                    </tr>
+                    <!-- Decline Details -->
+                    <tr v-if="pos.status_decline" >
+                      <td class="clsHeader" colspan="4">
+                        <h4>Decline Details</h4>
+                      </td>
+                    </tr>
+                    <tr v-if="pos.date_decline">
+                        <td class="clsLabelDetails" colspan="2">
+                            <h4>Date Declined </h4>
+                        </td>
+                        <td class="clsLabelDetails" colspan="2">
+                            <h4>Decline Reason </h4>
+                        </td>
+                    </tr>
+                    <tr v-if="pos.date_decline">
+                        <td class="clsValueDetails" colspan="2">
+                            <h4>{{pos.date_decline | moment("Do MMMM YYYY")}}</h4>
+                        </td>
+                        <td class="clsValueDetails" colspan="2">
+                            <h4>{{pos.decline_reason}}</h4>
                         </td>
                     </tr>
               </table>
@@ -384,6 +429,7 @@ export default {
       pos: [], //for po in pos {{po.[var name]}}
       page: 1,
       error: "",
+      reason: null,
       total_page: "",
       isNext: false,
       isPrevious: true,
@@ -393,7 +439,9 @@ export default {
       po_id: this.$route.params.po_no,
       status_t1: "",
       showDialog: false,
-      isLoading: false
+      isLoading: false,
+      isPosted: false,
+      isComponentModalActive: false
       // status_t1: ""
     };
   },
@@ -409,6 +457,7 @@ export default {
       this.poObj.po_no = this.po_no;
       this.poObj.id = this.po_no;
       const data = await po.report(this.poObj);
+      console.log("Result: ", data);
       this.pos = data;
       this.isLoading = false;
     } catch (err) {
@@ -470,8 +519,11 @@ export default {
         this.$router.push({ path: `/notification/${this.id}` });
     },
     async decline_po() {
-      this.poObj.id = this.po_id;
+      if(this.reason!=null){
+      this.isComponentModalActive = false;
       try {
+      this.poObj.id = this.po_id;
+      this.poObj.decline_reason = this.reason;
         const data = await po.po_decline(this.poObj);
         console.log(data); //can be ignored
         this.$buefy.snackbar.open({
@@ -484,6 +536,9 @@ export default {
         this.$router.push({ path: `/notification/${this.id}` });
       } catch (err) {
         this.error = err.message;
+      }
+      }else{
+        this.isComponentModalActive = true;
       }
     },
     async get_pending() {
