@@ -55,7 +55,7 @@ export default {
       // nama: null,
       isShow: false,
       name: null,
-      password: "password",
+      password: "",
       error: "",
       id: "",
       t1: "",
