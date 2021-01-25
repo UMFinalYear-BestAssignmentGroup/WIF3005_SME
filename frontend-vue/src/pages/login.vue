@@ -130,14 +130,14 @@ export default {
           if (localStorage.acct_t == "true")
             this.$router.push({ path: `/poListing/${login.id}` });
           else if (localStorage.is_admin == "true")
-            this.$router.push({ path: `/register/${login.id}` });
+            this.$router.push({ path: `/overallPerformance/${login.id}` });
           else if (
+            localStorage.t1 == "true" ||
             localStorage.t2 == "true" ||
-            localStorage.t3 == "true" ||
-            localStorage.t4 == "true"
+            localStorage.t3 == "true"
           )
-            this.$router.push({ path: `/notification/${login.id}` });
-          else this.$router.push({ path: `/psrListing/${login.id}` });
+            this.$router.push({ path: `/personalPerformance/${login.id}` });
+          else this.$router.push({ path: `/performanceDashboard/${login.id}` });
         }
         this.isLoading = false;
         console.log(login); //can be ignored
